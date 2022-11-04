@@ -89,7 +89,7 @@ export const offers: Offer[] = [
     ],
     title: 'Beautiful & luxurious apartment at great location',
     isFavorite: false,
-    isPremium: false,
+    isPremium: true,
     rating: 4.3,
     type: 'room',
     bedrooms: 1,
@@ -147,7 +147,7 @@ export const offers: Offer[] = [
       'https://11.react.pages.academy/static/hotel/20.jpg'
     ],
     title: 'House in countryside',
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 3.1,
     type: 'room',
