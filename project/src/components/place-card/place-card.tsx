@@ -6,6 +6,7 @@ import { Offer } from '../../types/offer';
 
 type PlaceCardProps = {
   offer: Offer;
+  cb: (x: number) => void;
 }
 
 function PlaceCard({ offer: {
@@ -17,10 +18,23 @@ function PlaceCard({ offer: {
   type,
   price,
   id,
-}}: PlaceCardProps): JSX.Element {
+}, cb}: PlaceCardProps): JSX.Element {
+
+  const MouseEnterHandler = () => {
+    cb(id);
+
+  };
+  const MouseLeaveHandler = () => {
+    cb(0);
+  };
+
 
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseEnter={MouseEnterHandler}
+      onMouseLeave={MouseLeaveHandler}
+    >
       {
         isPremium &&
         <div className="place-card__mark">
