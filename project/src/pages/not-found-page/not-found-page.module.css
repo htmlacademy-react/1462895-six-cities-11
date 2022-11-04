@@ -1,4 +1,4 @@
-.not-found {
+.error{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +11,7 @@
   line-height: 1.2;
 }
 
-.not-found__code {
+.code {
   transform: skew(-15deg);
   margin: 0;
   margin-left: 30px;
@@ -26,14 +26,14 @@
   border-radius: 20px;
 }
 
-.not-found__title {
+.desc {
   font-weight: 700;
   font-style: oblique;
   font-size: 32px;
   line-height: 1.2;
 }
 
-.not-found__link {
+.link {
   font-weight: 300;
   font-size: 19px;
   line-height: 1.211;
@@ -44,9 +44,10 @@
     text-shadow 0.3s ease;
 }
 
-.not-found__link:hover,
-.not-found__link:focus {
-  text-shadow: 1px 0 0,
-                0.5px 0 0,
-                -1px 0 0;
+.link:hover,
+.link:focus {
+  text-shadow:
+    1px 0 0,
+    0.5px 0 0,
+    -1px 0 0;
 }
