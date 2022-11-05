@@ -1,4 +1,4 @@
-import { LogoTypes } from '../../const';
+import { LogotypeType } from '../../const';
 import Logo from '../logo/logo';
 
 type FooterProps = {
@@ -8,7 +8,7 @@ type FooterProps = {
 function Footer({ isManPage = false }: FooterProps): JSX.Element {
   return (
     <footer className="footer container">
-      <Logo type={LogoTypes.Footer} isManPage={isManPage} />
+      <Logo type={LogotypeType.Footer} isManPage={isManPage} />
     </footer>
   );
 }

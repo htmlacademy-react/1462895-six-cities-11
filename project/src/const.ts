@@ -1,3 +1,12 @@
+export const Cities = [
+  { name: 'Paris', id: 1},
+  { name: 'Cologne', id: 2},
+  { name: 'Brussels', id: 3},
+  { name: 'Amsterdam', id: 4},
+  { name: 'Hamburg', id: 5},
+  { name: 'Dusseldorf', id: 6},
+];
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -5,7 +14,7 @@ export enum AppRoute {
   Room = '/room/:id',
 }
 
-export enum LogoTypes {
+export enum LogotypeType {
   Header = 'HEADER',
   Footer = 'FOOTER',
 }
@@ -16,7 +25,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum RatingLimits {
+export enum RatingLimit {
   Min = 0,
   Max = 5,
 }

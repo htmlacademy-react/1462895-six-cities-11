@@ -1,19 +1,19 @@
 import cn from 'classnames';
 
-import { LogoTypes } from '../../const';
+import { LogotypeType } from '../../const';
 
 type LogoProps = {
-  type: LogoTypes;
+  type: LogotypeType;
   isManPage: boolean;
 }
 
 function Logo({ type, isManPage = false }: LogoProps): JSX.Element {
   const sizes = {
-    [LogoTypes.Header]: {
+    [LogotypeType.Header]: {
       width: 81,
       height: 41,
     },
-    [LogoTypes.Footer]: {
+    [LogotypeType.Footer]: {
       width: 64,
       height: 33,
     },

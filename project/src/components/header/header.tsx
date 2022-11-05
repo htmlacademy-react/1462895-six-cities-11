@@ -1,4 +1,4 @@
-import { LogoTypes, AuthorizationStatus } from '../../const';
+import { LogotypeType, AuthorizationStatus } from '../../const';
 import Logo from '../logo/logo';
 import Nav from '../nav/nav';
 
@@ -18,7 +18,7 @@ function Header({
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo type={LogoTypes.Header} isManPage={isManPage} />
+            <Logo type={LogotypeType.Header} isManPage={isManPage} />
           </div>
           {hasNav && <Nav authorizationStatus={authorizationStatus} />}
         </div>
