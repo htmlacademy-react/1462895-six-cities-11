@@ -5,6 +5,11 @@ export enum AppRoute {
   Room = '/room/:id',
 }
 
+export enum LogoTypes {
+  Header = 'HEADER',
+  Footer = 'FOOTER',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
