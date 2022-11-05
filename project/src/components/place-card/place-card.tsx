@@ -6,34 +6,26 @@ import { Offer } from '../../types/offer';
 
 type PlaceCardProps = {
   offer: Offer;
-  cb: (x: number) => void;
+  onMouseCrossCard: (offerId: number | null) => void;
 }
 
-function PlaceCard({ offer: {
-  previewImage,
-  title,
-  isFavorite,
-  isPremium,
-  rating,
-  type,
-  price,
-  id,
-}, cb}: PlaceCardProps): JSX.Element {
-
-  const MouseEnterHandler = () => {
-    cb(id);
-
-  };
-  const MouseLeaveHandler = () => {
-    cb(0);
-  };
-
+function PlaceCard({ offer, onMouseCrossCard }: PlaceCardProps): JSX.Element {
+  const {
+    previewImage,
+    title,
+    isFavorite,
+    isPremium,
+    rating,
+    type,
+    price,
+    id,
+  } = offer;
 
   return (
     <article
       className="cities__card place-card"
-      onMouseEnter={MouseEnterHandler}
-      onMouseLeave={MouseLeaveHandler}
+      onMouseEnter={() => onMouseCrossCard(id)}
+      onMouseLeave={() => onMouseCrossCard(null)}
     >
       {
         isPremium &&
@@ -42,7 +34,7 @@ function PlaceCard({ offer: {
         </div>
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="!#">
+        <a href="/#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place preview" />
         </a>
       </div>
@@ -72,7 +64,7 @@ function PlaceCard({ offer: {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="!#">{title}</a>
+          <a href="/#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

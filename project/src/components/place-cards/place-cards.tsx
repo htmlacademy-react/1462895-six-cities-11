@@ -9,10 +9,19 @@ type PlaceCardsProps = {
 }
 
 function PlaceCards({ offers }: PlaceCardsProps): JSX.Element {
-  const [,setActivePlaceCardId] = useState(0);
+  const [, setActiveOfferId] = useState<number | null>(null);
+
+  const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
+
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <PlaceCard offer={offer} cb={(x) => setActivePlaceCardId(x)} key={offer.id} />)}
+      {offers.map((offer) => (
+        <PlaceCard
+          offer={offer}
+          onMouseCrossCard={handleMouseCrossCard}
+          key={offer.id}
+        />
+      ))}
     </div>
   );
 }
