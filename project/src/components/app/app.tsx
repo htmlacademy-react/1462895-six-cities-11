@@ -4,10 +4,10 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 
 import { Offer } from '../../types/offer';
 
-import MainPage from '../../pages/main/main';
-import FavoritesPage from '../../pages/favorites/favorites';
-import LoginPage from '../../pages/login/login';
-import PropertyPage from '../../pages/property/property';
+import MainPage from '../../pages/main-page/main-page';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import LoginPage from '../../pages/login-page/login-page';
+import PropertyPage from '../../pages/property-page/property-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 
