@@ -1,12 +1,18 @@
-import { LogoTypes } from '../../const';
+import { LogoTypes, AuthorizationStatus } from '../../const';
 import Logo from '../logo/logo';
+import Nav from '../nav/nav';
 
 type HeaderProps = {
   isManPage?: boolean;
   hasNav?: boolean;
+  authorizationStatus?: AuthorizationStatus;
 }
 
-function Header({ isManPage = false, hasNav = false }: HeaderProps): JSX.Element {
+function Header({
+  isManPage = false,
+  hasNav = false,
+  authorizationStatus = AuthorizationStatus.NoAuth,
+}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -14,26 +20,7 @@ function Header({ isManPage = false, hasNav = false }: HeaderProps): JSX.Element
           <div className="header__left">
             <Logo type={LogoTypes.Header} isManPage={isManPage} />
           </div>
-          {
-            hasNav &&
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="/#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="/#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          }
+          {hasNav && <Nav authorizationStatus={authorizationStatus} />}
         </div>
       </div>
     </header>

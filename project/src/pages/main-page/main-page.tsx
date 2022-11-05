@@ -1,3 +1,5 @@
+import { AuthorizationStatus } from '../../const';
+
 import Header from '../../components/header/header';
 import PlaceCards from '../../components/place-cards/place-cards';
 
@@ -11,7 +13,7 @@ type MainPageProps = {
 function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header isManPage hasNav />
+      <Header isManPage hasNav authorizationStatus={AuthorizationStatus.Auth} />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
