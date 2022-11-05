@@ -1,15 +1,17 @@
 import cn from 'classnames';
 
+import { PlaceCardType } from '../../const';
 import { getRoundPercentRating } from '../../utils';
 
 import { Offer } from '../../types/offer';
 
 type PlaceCardProps = {
   offer: Offer;
-  onMouseCrossCard: (offerId: number | null) => void;
+  cardType: PlaceCardType;
+  onMouseCrossCard?: (offerId: number | null) => void;
 }
 
-function PlaceCard({ offer, onMouseCrossCard }: PlaceCardProps): JSX.Element {
+function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.Element {
   const {
     previewImage,
     title,
@@ -21,11 +23,27 @@ function PlaceCard({ offer, onMouseCrossCard }: PlaceCardProps): JSX.Element {
     id,
   } = offer;
 
+  const handleMouseEnter = onMouseCrossCard ? () => onMouseCrossCard(id) : undefined;
+  const handleMouseLeave = onMouseCrossCard ? () => onMouseCrossCard(null) : undefined;
+
+  const sizes = {
+    [PlaceCardType.Cities]: {
+      width: 260,
+      height: 200,
+    },
+    [PlaceCardType.Favorites]: {
+      width: 150,
+      height: 110,
+    },
+  };
+
+  const { width, height } = sizes[cardType];
+
   return (
     <article
-      className="cities__card place-card"
-      onMouseEnter={() => onMouseCrossCard(id)}
-      onMouseLeave={() => onMouseCrossCard(null)}
+      className={`${cardType}__card place-card`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {
         isPremium &&
@@ -33,12 +51,23 @@ function PlaceCard({ offer, onMouseCrossCard }: PlaceCardProps): JSX.Element {
           <span>Premium</span>
         </div>
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="/#">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place preview" />
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={width}
+            height={height}
+            alt="Place preview"
+          />
         </a>
       </div>
-      <div className="place-card__info">
+      <div
+        className={cn(
+          'place-card__info',
+          {'favorites__card-info': cardType === PlaceCardType.Favorites}
+        )}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -66,7 +95,7 @@ function PlaceCard({ offer, onMouseCrossCard }: PlaceCardProps): JSX.Element {
         <h2 className="place-card__name">
           <a href="/#">{title}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
       </div>
     </article>
   );

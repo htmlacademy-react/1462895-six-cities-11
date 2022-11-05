@@ -1,7 +1,7 @@
 import { AuthorizationStatus } from '../../const';
 
 import Header from '../../components/header/header';
-import Locations from '../../components/locations/locations';
+import AvailableCities from '../../components/locations/locations';
 import PlaceCards from '../../components/place-cards/place-cards';
 
 import { Offer } from '../../types/offer';
@@ -19,7 +19,7 @@ function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Locations currentLocation="Amsterdam" />
+          <AvailableCities currentLocation="Amsterdam" />
         </div>
         <div className="cities">
           <div className="cities__places-container container">

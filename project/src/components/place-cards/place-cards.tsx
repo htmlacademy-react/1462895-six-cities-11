@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { PlaceCardType } from '../../const';
+
 import PlaceCard from '../place-card/place-card';
 
 import { Offer } from '../../types/offer';
@@ -18,6 +20,7 @@ function PlaceCards({ offers }: PlaceCardsProps): JSX.Element {
       {offers.map((offer) => (
         <PlaceCard
           offer={offer}
+          cardType={PlaceCardType.Cities}
           onMouseCrossCard={handleMouseCrossCard}
           key={offer.id}
         />

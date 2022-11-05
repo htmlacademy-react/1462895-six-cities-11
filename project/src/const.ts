@@ -1,4 +1,4 @@
-export const Cities = [
+export const AvailableCities = [
   { name: 'Paris', id: 1},
   { name: 'Cologne', id: 2},
   { name: 'Brussels', id: 3},
@@ -28,4 +28,9 @@ export enum AuthorizationStatus {
 export enum RatingLimit {
   Min = 0,
   Max = 5,
+}
+
+export enum PlaceCardType {
+  Cities = 'cities',
+  Favorites = 'favorites',
 }

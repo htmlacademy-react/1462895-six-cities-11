@@ -1,4 +1,4 @@
-import { Cities } from '../../const';
+import { AvailableCities } from '../../const';
 
 type LocationsProps = {
   currentLocation: string;
@@ -8,7 +8,7 @@ function Locations({ currentLocation }: LocationsProps): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {Cities.map((city) => (
+        {AvailableCities.map((city) => (
           <li className="locations__item" key={city.id}>
             {
               city.name === currentLocation
