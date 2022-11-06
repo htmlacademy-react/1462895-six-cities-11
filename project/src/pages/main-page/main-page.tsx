@@ -1,10 +1,10 @@
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, PlaceCardType } from '../../const';
 
 import Header from '../../components/header/header';
 import AvailableCities from '../../components/locations/locations';
 import PlaceCards from '../../components/place-cards/place-cards';
 
-import { Offer } from '../../types/offer';
+import { Offer} from '../../types/offer';
 
 type MainPageProps = {
   offersCount: number;
@@ -41,7 +41,7 @@ function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlaceCards offers={offers} />
+              <PlaceCards offers={offers} cardType={PlaceCardType.Cities} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

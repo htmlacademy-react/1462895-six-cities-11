@@ -15,8 +15,8 @@ export enum AppRoute {
 }
 
 export enum LogotypeType {
-  Header = 'HEADER',
-  Footer = 'FOOTER',
+  Header = 'header',
+  Footer = 'footer',
 }
 
 export enum AuthorizationStatus {
