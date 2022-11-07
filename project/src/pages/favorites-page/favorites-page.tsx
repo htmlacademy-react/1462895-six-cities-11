@@ -5,9 +5,13 @@ import Footer from '../../components/footer/footer';
 
 import FavoritesList from '../../components/favorites-list/favorites-list';
 
-import { offers } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 
-function FavoritesPage():JSX.Element {
+type FavoritesPageProps = {
+  offers: Offer[];
+}
+
+function FavoritesPage({ offers }: FavoritesPageProps):JSX.Element {
   return (
     <div className="page">
       <Header hasNav authorizationStatus={AuthorizationStatus.Auth} />

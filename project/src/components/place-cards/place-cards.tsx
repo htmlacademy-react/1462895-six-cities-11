@@ -23,8 +23,9 @@ function PlaceCards({ offers, cardType }: PlaceCardsProps): JSX.Element {
       className={cn(
         {
           'cities__places-list': cardType === PlaceCardType.Cities,
-          'places__list': cardType === PlaceCardType.Cities,
           'tabs__content': cardType === PlaceCardType.Cities,
+          'near-places__list': cardType === PlaceCardType.NearPlaces,
+          'places__list': cardType !== PlaceCardType.Favorites,
           'favorites__places': cardType === PlaceCardType.Favorites,
         }
       )}

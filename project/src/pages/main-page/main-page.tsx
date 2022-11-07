@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import AvailableCities from '../../components/locations/locations';
 import PlaceCards from '../../components/place-cards/place-cards';
 
-import { Offer} from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type MainPageProps = {
   offersCount: number;

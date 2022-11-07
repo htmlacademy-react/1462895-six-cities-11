@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import cn from 'classnames';
 
 import { LogotypeType } from '../../const';
@@ -22,12 +24,12 @@ function Logo({ type, isManPage = false }: LogoProps): JSX.Element {
   const { width, height } = sizes[type];
 
   return (
-    <a
+    <Link
       className={cn(
         `${type}__logo-link`,
         {[`${type}__logo-link--active`]: isManPage}
       )}
-      href="/"
+      to="/"
     >
       <img
         className={`${type}__logo`}
@@ -36,7 +38,7 @@ function Logo({ type, isManPage = false }: LogoProps): JSX.Element {
         width={width}
         height={height}
       />
-    </a>
+    </Link>
   );
 }
 

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import cn from 'classnames';
 
 import { PlaceCardType } from '../../const';
@@ -32,6 +34,10 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
       width: 150,
       height: 110,
     },
+    [PlaceCardType.NearPlaces]: {
+      width: 260,
+      height: 200,
+    },
   };
 
   const { width, height } = sizes[cardType];
@@ -49,7 +55,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
         </div>
       }
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <a href="/#">
+        <Link to={`/offer/:${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -57,7 +63,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
             height={height}
             alt="Place preview"
           />
-        </a>
+        </Link>
       </div>
       <div
         className={cn(
@@ -90,7 +96,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{title}</a>
+          <Link to={`/offer/:${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
       </div>

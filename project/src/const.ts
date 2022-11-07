@@ -11,7 +11,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Room = '/room/:id',
+  Offer = '/offer/:id',
 }
 
 export enum LogotypeType {
@@ -33,4 +33,5 @@ export enum RatingLimit {
 export enum PlaceCardType {
   Cities = 'cities',
   Favorites = 'favorites',
+  NearPlaces = 'near-places',
 }
