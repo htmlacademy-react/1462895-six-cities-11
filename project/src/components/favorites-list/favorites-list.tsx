@@ -1,5 +1,3 @@
-// import cn from 'classnames';
-
 import { PlaceCardType } from '../../const';
 
 import PlaceCards from '../place-cards/place-cards';
