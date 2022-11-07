@@ -14,7 +14,7 @@ function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
 
   const favoriteoffersByCities: OffersByCities = {};
 
-  AvailableCities.forEach((city) => (favoriteoffersByCities[city.name] = []));
+  AvailableCities.forEach((city) => (favoriteoffersByCities[city] = []));
 
   offers.forEach((offer) => {
     if (offer.isFavorite) {
@@ -26,18 +26,18 @@ function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
   return (
     <ul className="favorites__list">
       {AvailableCities
-        .filter((city) => favoriteoffersByCities[city.name].length)
+        .filter((city) => favoriteoffersByCities[city].length)
         .map((city) => (
-          <li className="favorites__locations-items" key={city.id}>
+          <li className="favorites__locations-items" key={city}>
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
                 <a className="locations__item-link" href="/#">
-                  <span>{city.name}</span>
+                  <span>{city}</span>
                 </a>
               </div>
             </div>
             <div className="favorites__places">
-              <PlaceCards offers={favoriteoffersByCities[city.name]} cardType={PlaceCardType.Favorites} />
+              <PlaceCards offers={favoriteoffersByCities[city]} cardType={PlaceCardType.Favorites} />
             </div>
           </li>
         ))}

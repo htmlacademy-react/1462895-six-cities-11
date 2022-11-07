@@ -9,17 +9,17 @@ function Locations({ currentLocation }: LocationsProps): JSX.Element {
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {AvailableCities.map((city) => (
-          <li className="locations__item" key={city.id}>
+          <li className="locations__item" key={city}>
             {
-              city.name === currentLocation
+              city === currentLocation
                 ? (
                   <div className="locations__item-link tabs__item tabs__item--active">
-                    <span>{city.name}</span>
+                    <span>{city}</span>
                   </div>
                 )
                 : (
                   <a className="locations__item-link tabs__item" href="/#">
-                    <span>{city.name}</span>
+                    <span>{city}</span>
                   </a>
                 )
             }
