@@ -206,7 +206,7 @@ export const offers: Offer[] = [
       'https://11.react.pages.academy/static/hotel/9.jpg'
     ],
     'title': 'Beautiful & luxurious apartment at great location',
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': false,
     'rating': 3.5,
     'type': 'house',
@@ -812,7 +812,7 @@ export const offers: Offer[] = [
       'https://11.react.pages.academy/static/hotel/6.jpg'
     ],
     'title': 'The Pondhouse - A Magical Place',
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': false,
     'rating': 2.7,
     'type': 'room',
@@ -4486,7 +4486,7 @@ export const offers: Offer[] = [
       'https://11.react.pages.academy/static/hotel/7.jpg'
     ],
     'title': 'House in countryside',
-    'isFavorite': true,
+    'isFavorite': false,
     'isPremium': false,
     'rating': 3.7,
     'type': 'room',
@@ -4594,7 +4594,7 @@ export const offers: Offer[] = [
       'https://11.react.pages.academy/static/hotel/20.jpg'
     ],
     'title': 'Canal View Prinsengracht',
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 4.9,
     'type': 'room',

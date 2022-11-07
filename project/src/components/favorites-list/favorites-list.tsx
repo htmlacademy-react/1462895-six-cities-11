@@ -1,6 +1,6 @@
 // import cn from 'classnames';
 
-import { AvailableCities, PlaceCardType } from '../../const';
+import { PlaceCardType } from '../../const';
 
 import PlaceCards from '../place-cards/place-cards';
 
@@ -10,37 +10,39 @@ type FavoritesListProps = {
   offers: Offer[];
 }
 
-function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
-
-  const favoriteoffersByCities: OffersByCities = {};
-
-  AvailableCities.forEach((city) => (favoriteoffersByCities[city] = []));
-
-  offers.forEach((offer) => {
+const mapOffersToCities = (data: Offer[]) => (
+  data.reduce<OffersByCities>((acc: OffersByCities, offer: Offer) => {
     if (offer.isFavorite) {
-      favoriteoffersByCities[offer.city.name].push(offer);
+      if (!acc[offer.city.name]) {
+        acc[offer.city.name] = [];
+      }
+
+      acc[offer.city.name].push(offer);
     }
-  });
+
+    return acc;
+  }, {}));
+
+function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
+  const groupedOffers = mapOffersToCities(offers);
 
 
   return (
     <ul className="favorites__list">
-      {AvailableCities
-        .filter((city) => favoriteoffersByCities[city].length)
-        .map((city) => (
-          <li className="favorites__locations-items" key={city}>
-            <div className="favorites__locations locations locations--current">
-              <div className="locations__item">
-                <a className="locations__item-link" href="/#">
-                  <span>{city}</span>
-                </a>
-              </div>
+      {Object.entries(groupedOffers).map(([ city, cityOffers ]) => (
+        <li className="favorites__locations-items" key={city}>
+          <div className="favorites__locations locations locations--current">
+            <div className="locations__item">
+              <a className="locations__item-link" href="/#">
+                <span>{city}</span>
+              </a>
             </div>
-            <div className="favorites__places">
-              <PlaceCards offers={favoriteoffersByCities[city]} cardType={PlaceCardType.Favorites} />
-            </div>
-          </li>
-        ))}
+          </div>
+          <div className="favorites__places">
+            <PlaceCards offers={cityOffers} cardType={PlaceCardType.Favorites} />
+          </div>
+        </li>
+      ))}
     </ul>
   );
 }
