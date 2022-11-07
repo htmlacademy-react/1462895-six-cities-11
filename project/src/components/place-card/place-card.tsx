@@ -23,9 +23,6 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
     id,
   } = offer;
 
-  const handleMouseEnter = onMouseCrossCard ? () => onMouseCrossCard(id) : undefined;
-  const handleMouseLeave = onMouseCrossCard ? () => onMouseCrossCard(null) : undefined;
-
   const sizes = {
     [PlaceCardType.Cities]: {
       width: 260,
@@ -42,8 +39,8 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
   return (
     <article
       className={`${cardType}__card place-card`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => onMouseCrossCard?.(id)}
+      onMouseLeave={() => onMouseCrossCard?.(null)}
     >
       {
         isPremium &&

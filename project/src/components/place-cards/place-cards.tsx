@@ -29,14 +29,26 @@ function PlaceCards({ offers, cardType }: PlaceCardsProps): JSX.Element {
         }
       )}
     >
-      {offers.map((offer) => (
-        <PlaceCard
-          offer={offer}
-          cardType={cardType}
-          onMouseCrossCard={handleMouseCrossCard}
-          key={offer.id}
-        />
-      ))}
+      {offers.map((offer) => {
+        if (cardType === PlaceCardType.Cities) {
+          return (
+            <PlaceCard
+              offer={offer}
+              cardType={cardType}
+              onMouseCrossCard={handleMouseCrossCard}
+              key={offer.id}
+            />
+          );
+        }
+
+        return (
+          <PlaceCard
+            offer={offer}
+            cardType={cardType}
+            key={offer.id}
+          />
+        );
+      })}
     </div>
   );
 }
