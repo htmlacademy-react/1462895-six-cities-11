@@ -2,32 +2,38 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
 
-import MainPage from '../../pages/main/main';
-import FavoritesPage from '../../pages/favorites/favorites';
-import LoginPage from '../../pages/login/login';
-import PropertyPage from '../../pages/property/property';
+import { Offer } from '../../types/offer';
+
+import MainPage from '../../pages/main-page/main-page';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import LoginPage from '../../pages/login-page/login-page';
+import PropertyPage from '../../pages/property-page/property-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   offersCount: number;
+  offers: Offer[];
 }
 
-function App({ offersCount }: AppProps): JSX.Element {
+function App({ offersCount, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage offersCount={offersCount} />} />
+        <Route
+          path={AppRoute.Main}
+          element={<MainPage offersCount={offersCount} offers={offers} />}
+        />
         <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesPage />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesPage offers={offers} />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Room} element={<PropertyPage />} />
+        <Route path={AppRoute.Offer} element={<PropertyPage offers={offers} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

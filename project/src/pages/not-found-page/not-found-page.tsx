@@ -9,10 +9,10 @@ function NotFoundPage(): JSX.Element {
     <div className="page page--gray">
       <main className="page__main">
         <div className="container">
-          <section className={styles['not-found']}>
-            <p className={styles['not-found__code']}>404</p>
-            <h1 className={styles['not-found__title']}>Page not found</h1>
-            <Link to={AppRoute.Main} className={styles['not-found__link']}>Go to main page</Link>
+          <section className={styles.error}>
+            <p className={styles.code}>404</p>
+            <h1 className={styles.desc}>Page not found</h1>
+            <Link to={AppRoute.Main} className={styles.link}>Go to main page</Link>
           </section>
         </div>
       </main>
