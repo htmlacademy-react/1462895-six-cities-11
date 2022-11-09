@@ -1,3 +1,5 @@
+import { Rating } from './types/rating';
+
 export const AvailableCities = [
   'Paris',
   'Cologne',
@@ -5,6 +7,14 @@ export const AvailableCities = [
   'Amsterdam',
   'Hamburg',
   'Dusseldorf',
+];
+
+export const RatingMark: Rating[] = [
+  ['perfect', 5],
+  ['good', 4],
+  ['not bad', 3],
+  ['badly', 2],
+  ['terribly', 1],
 ];
 
 export enum AppRoute {
@@ -35,3 +45,4 @@ export enum PlaceCardType {
   Favorites = 'favorites',
   NearPlaces = 'near-places',
 }
+

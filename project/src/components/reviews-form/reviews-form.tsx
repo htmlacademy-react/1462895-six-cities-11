@@ -1,15 +1,19 @@
 import React, { ChangeEvent, useState } from 'react';
 
-const MIN_REVIEW_LENGTH = 50; // symbols
+import StarRadioBtn from '../star-radio-btn/star-radio-btn';
+
+import { RatingMark } from '../../const';
+
+const MIN_REVIEW_LENGTH = 50; // characters
 
 type FormDataState = {
-  rating: string | null;
+  rating: string;
   review: string;
 }
 
 function ReviewsForm(): JSX.Element {
   const [formData, setFormData] = useState<FormDataState>({
-    rating: null,
+    rating: '0',
     review: '',
   });
 
@@ -17,8 +21,9 @@ function ReviewsForm(): JSX.Element {
     const { name, value } = evt.target;
 
     setFormData({ ...formData, [name]: value });
-
   };
+
+  const isDisabled = formData.rating === '0' || formData.review.length < MIN_REVIEW_LENGTH;
 
   return (
     <form
@@ -28,22 +33,8 @@ function ReviewsForm(): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {[5, 4, 3, 2, 1].map((item) => (
-          <React.Fragment key={item}>
-            <input
-              className="form__rating-input visually-hidden"
-              name="rating"
-              value={`${item}`}
-              onChange={handleFieldChange}
-              id={`${item}-stars`}
-              type="radio"
-            />
-            <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
-              <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-            </label>
-          </React.Fragment>
+        {RatingMark.map((starMark) => (
+          <StarRadioBtn starMark={starMark} fieldChangeHandler={handleFieldChange} key={starMark[1]} />
         ))}
       </div>
       <textarea
@@ -57,12 +48,12 @@ function ReviewsForm(): JSX.Element {
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
-          stay with at least <b className="reviews__text-amount">50 characters</b>.
+          stay with at least <b className="reviews__text-amount">{MIN_REVIEW_LENGTH} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={formData.rating === null || formData.review.length < MIN_REVIEW_LENGTH}
+          disabled={isDisabled}
         >
           Submit
         </button>
