@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import StarRadioBtn from '../star-radio-btn/star-radio-btn';
 
-import { RatingMark } from '../../const';
+import { StarMarks } from '../../const';
 
 const MIN_REVIEW_LENGTH = 50; // characters
 
@@ -33,7 +33,7 @@ function ReviewsForm(): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {RatingMark.map((starMark) => (
+        {StarMarks.map((starMark) => (
           <StarRadioBtn starMark={starMark} fieldChangeHandler={handleFieldChange} key={starMark[1]} />
         ))}
       </div>

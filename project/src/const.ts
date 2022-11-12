@@ -9,7 +9,7 @@ export const AvailableCities = [
   'Dusseldorf',
 ];
 
-export const RatingMark: Rating[] = [
+export const StarMarks: Rating[] = [
   ['perfect', 5],
   ['good', 4],
   ['not bad', 3],
@@ -46,3 +46,16 @@ export enum PlaceCardType {
   NearPlaces = 'near-places',
 }
 
+export enum LayerConfig {
+  BaseUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  Attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+}
+
+export enum CustomMarker {
+  Default = 'img/pin.svg',
+  Current = 'img/pin-active.svg',
+}
+
+export enum MapType {
+  Cities = 'cities',
+}

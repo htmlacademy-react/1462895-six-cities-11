@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import cn from 'classnames';
 
 import { PlaceCardType } from '../../const';
@@ -11,32 +9,29 @@ import { Offer } from '../../types/offer';
 type PlaceCardsProps = {
   offers: Offer[];
   cardType: PlaceCardType;
+  onMouseCrossCard?: (offerId: number | null) => void;
 }
 
-function PlaceCards({ offers, cardType }: PlaceCardsProps): JSX.Element {
-  const [, setActiveOfferId] = useState<number | null>(null);
-
-  const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
+function PlaceCards({ offers, cardType, onMouseCrossCard }: PlaceCardsProps): JSX.Element {
+  const clList = cn(
+    {
+      'cities__places-list': cardType === PlaceCardType.Cities,
+      'tabs__content': cardType === PlaceCardType.Cities,
+      'near-places__list': cardType === PlaceCardType.NearPlaces,
+      'places__list': cardType !== PlaceCardType.Favorites,
+      'favorites__places': cardType === PlaceCardType.Favorites,
+    }
+  );
 
   return (
-    <div
-      className={cn(
-        {
-          'cities__places-list': cardType === PlaceCardType.Cities,
-          'tabs__content': cardType === PlaceCardType.Cities,
-          'near-places__list': cardType === PlaceCardType.NearPlaces,
-          'places__list': cardType !== PlaceCardType.Favorites,
-          'favorites__places': cardType === PlaceCardType.Favorites,
-        }
-      )}
-    >
+    <div className={clList}>
       {offers.map((offer) => {
         if (cardType === PlaceCardType.Cities) {
           return (
             <PlaceCard
               offer={offer}
               cardType={cardType}
-              onMouseCrossCard={handleMouseCrossCard}
+              onMouseCrossCard={onMouseCrossCard}
               key={offer.id}
             />
           );
