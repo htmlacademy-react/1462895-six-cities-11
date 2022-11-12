@@ -11,12 +11,16 @@ import { Offer } from '../../types/offer';
 type PlaceCardsProps = {
   offers: Offer[];
   cardType: PlaceCardType;
+  liftUpCrossedOfferId?: (offerId: number | null) => void;
 }
 
-function PlaceCards({ offers, cardType }: PlaceCardsProps): JSX.Element {
+function PlaceCards({ offers, cardType, liftUpCrossedOfferId }: PlaceCardsProps): JSX.Element {
   const [, setActiveOfferId] = useState<number | null>(null);
 
-  const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
+  const handleMouseCrossCard = (offerId: number | null) => {
+    setActiveOfferId(offerId);
+    liftUpCrossedOfferId?.(offerId);
+  };
 
   return (
     <div

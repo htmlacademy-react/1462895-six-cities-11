@@ -1,17 +1,26 @@
+import { useState } from 'react';
+
 import { AuthorizationStatus, PlaceCardType } from '../../const';
 
 import Header from '../../components/header/header';
 import AvailableCities from '../../components/locations/locations';
 import PlaceCards from '../../components/place-cards/place-cards';
+import Map from '../../components/map/map';
 
-import { Offer } from '../../types/offer';
+import { Offer, Location } from '../../types/offer';
 
 type MainPageProps = {
   offersCount: number;
   offers: Offer[];
 }
 
+const getLocation = (data: Offer[]):Location => data[0].city.location;
+
 function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
+  const [crossedOfferId, setCrossedOfferId] = useState<number | null>(null);
+
+  const handleMouseCrossCard = (offerId: number | null) => setCrossedOfferId(offerId);
+
   return (
     <div className="page page--gray page--main">
       <Header isManPage hasNav authorizationStatus={AuthorizationStatus.Auth} />
@@ -41,10 +50,14 @@ function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlaceCards offers={offers} cardType={PlaceCardType.Cities} />
+              <PlaceCards
+                offers={offers}
+                cardType={PlaceCardType.Cities}
+                liftUpCrossedOfferId={handleMouseCrossCard}
+              />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={getLocation(offers)} offers={offers} crossedCardId={crossedOfferId} />
             </div>
           </div>
         </div>
