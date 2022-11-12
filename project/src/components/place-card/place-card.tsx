@@ -55,7 +55,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
         </div>
       }
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`/offer/:${id}`}>
+        <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -96,7 +96,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/:${id}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
       </div>

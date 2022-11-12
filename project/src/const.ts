@@ -9,7 +9,7 @@ export const AvailableCities = [
   'Dusseldorf',
 ];
 
-export const RatingMark: Rating[] = [
+export const StarMarks: Rating[] = [
   ['perfect', 5],
   ['good', 4],
   ['not bad', 3],
