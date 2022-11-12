@@ -14,21 +14,21 @@ type MapProps = {
   crossedCardId: number | null;
 }
 
+const defaultCustomMarker = leaflet.icon({
+  iconUrl: CustomMarker.Default,
+  iconSize: [27, 39],
+  iconAnchor: [14, 39],
+});
+
+const currentCustomMarker = leaflet.icon({
+  iconUrl: CustomMarker.Current,
+  iconSize: [27, 39],
+  iconAnchor: [14, 39],
+});
+
 function Map({ city, offers, mapType, crossedCardId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-
-  const defaultCustomMarker = leaflet.icon({
-    iconUrl: CustomMarker.Default,
-    iconSize: [27, 39],
-    iconAnchor: [14, 39],
-  });
-
-  const currentCustomMarker = leaflet.icon({
-    iconUrl: CustomMarker.Current,
-    iconSize: [27, 39],
-    iconAnchor: [14, 39],
-  });
 
   useEffect(() => {
     if (map) {
