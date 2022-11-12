@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { AuthorizationStatus, PlaceCardType } from '../../const';
+import { AuthorizationStatus, PlaceCardType, MapType } from '../../const';
 
 import Header from '../../components/header/header';
 import AvailableCities from '../../components/locations/locations';
@@ -17,9 +17,9 @@ type MainPageProps = {
 const getLocation = (data: Offer[]):Location => data[0].city.location;
 
 function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
-  const [crossedOfferId, setCrossedOfferId] = useState<number | null>(null);
+  const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 
-  const handleMouseCrossCard = (offerId: number | null) => setCrossedOfferId(offerId);
+  const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
 
   return (
     <div className="page page--gray page--main">
@@ -53,11 +53,16 @@ function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
               <PlaceCards
                 offers={offers}
                 cardType={PlaceCardType.Cities}
-                liftUpCrossedOfferId={handleMouseCrossCard}
+                onMouseCrossCard={handleMouseCrossCard}
               />
             </section>
             <div className="cities__right-section">
-              <Map city={getLocation(offers)} offers={offers} crossedCardId={crossedOfferId} />
+              <Map
+                city={getLocation(offers)}
+                offers={offers}
+                mapType={MapType.Cities}
+                crossedCardId={ActiveOfferId}
+              />
             </div>
           </div>
         </div>

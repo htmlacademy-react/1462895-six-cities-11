@@ -55,3 +55,7 @@ export enum CustomMarker {
   Default = 'img/pin.svg',
   Current = 'img/pin-active.svg',
 }
+
+export enum MapType {
+  Cities = 'cities',
+}

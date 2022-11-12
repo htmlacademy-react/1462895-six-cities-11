@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 
 import cn from 'classnames';
 
-import { PlaceCardType } from '../../const';
+import { AppRoute, PlaceCardType } from '../../const';
 import { getRoundPercentRating } from '../../utils';
 
 import { Offer } from '../../types/offer';
@@ -24,6 +24,19 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
     price,
     id,
   } = offer;
+
+  const infoClassList = cn(
+    'place-card__info',
+    {'favorites__card-info': cardType === PlaceCardType.Favorites}
+  );
+
+  const bookmarkBtnClassList = cn(
+    'place-card__bookmark-button',
+    'button',
+    {'place-card__bookmark-button--active': isFavorite}
+  );
+
+  const linkTo = generatePath(AppRoute.Offer, { id: `${id}` });
 
   const sizes = {
     [PlaceCardType.Cities]: {
@@ -55,7 +68,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
         </div>
       }
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`/offer/${id}`}>
+        <Link to={linkTo}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -65,24 +78,13 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
           />
         </Link>
       </div>
-      <div
-        className={cn(
-          'place-card__info',
-          {'favorites__card-info': cardType === PlaceCardType.Favorites}
-        )}
-      >
+      <div className={infoClassList}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={cn(
-              'place-card__bookmark-button',
-              'button',
-              {'place-card__bookmark-button--active': isFavorite})}
-            type="button"
-          >
+          <button className={bookmarkBtnClassList} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -96,7 +98,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link to={linkTo}>{title}</Link>
         </h2>
         <p className="place-card__type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
       </div>

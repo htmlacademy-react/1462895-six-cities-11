@@ -3,30 +3,31 @@ import { useEffect, useRef } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { CustomMarker } from '../../const';
+import { CustomMarker, MapType } from '../../const';
 import { Offer, Location } from '../../types/offer';
 import useMap from '../../hooks/use-map';
 
 type MapProps = {
   city: Location;
   offers: Offer[];
+  mapType: MapType;
   crossedCardId: number | null;
 }
 
-function Map({ city, offers, crossedCardId }: MapProps): JSX.Element {
+function Map({ city, offers, mapType, crossedCardId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   const defaultCustomMarker = leaflet.icon({
     iconUrl: CustomMarker.Default,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [14, 39],
   });
 
   const currentCustomMarker = leaflet.icon({
     iconUrl: CustomMarker.Current,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [14, 39],
   });
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function Map({ city, offers, crossedCardId }: MapProps): JSX.Element {
 
   return (
     <section
-      className="cities__map map"
+      className={`${mapType}__map map`}
       ref={mapRef}
     >
 

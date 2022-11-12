@@ -172,7 +172,10 @@ function PropertyPage({ offers }: PropertyPageProps):JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCards offers={ [offers[11], offers[22], offers[33], offers[44]].slice(0,3) } cardType={PlaceCardType.NearPlaces} />
+            <PlaceCards
+              offers={offers.slice(0,3)}
+              cardType={PlaceCardType.NearPlaces}
+            />
           </section>
         </div>
       </main>
