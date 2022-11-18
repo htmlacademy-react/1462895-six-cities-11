@@ -26,7 +26,7 @@ function PlaceCards({ offers, cardType, onMouseCrossCard }: PlaceCardsProps): JS
   return (
     <div className={clList}>
       {offers.map((offer) => {
-        if (cardType === PlaceCardType.Cities) {
+        if (onMouseCrossCard) {
           return (
             <PlaceCard
               offer={offer}

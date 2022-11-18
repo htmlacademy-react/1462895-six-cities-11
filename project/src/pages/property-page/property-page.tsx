@@ -1,8 +1,12 @@
-import { PlaceCardType } from '../../const';
+import { useState } from 'react';
+
+import { MapType, PlaceCardType } from '../../const';
+import { getLocation } from '../../utils';
 
 import Header from '../../components/header/header';
 import PlaceCards from '../../components/place-cards/place-cards';
 import Reviews from '../../components/reviews/reviews';
+import Map from '../../components/map/map';
 
 import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
@@ -13,6 +17,10 @@ type PropertyPageProps = {
 }
 
 function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
+  const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
+
+  const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
+
   return (
     <div className="page">
       <Header hasNav />
@@ -141,7 +149,12 @@ function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
               <Reviews reviews={reviews} />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            city={getLocation(offers.slice(0,3))}
+            offers={offers.slice(0,3)}
+            mapType={MapType.NearPlaces}
+            crossedCardId={ActiveOfferId}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -149,6 +162,7 @@ function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
             <PlaceCards
               offers={offers.slice(0,3)}
               cardType={PlaceCardType.NearPlaces}
+              onMouseCrossCard={handleMouseCrossCard}
             />
           </section>
         </div>

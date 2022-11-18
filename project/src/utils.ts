@@ -1,5 +1,7 @@
 import { RatingLimit } from './const';
 
+import { Offer, Location } from './types/offer';
+
 const PERCENTS_PER_STAR = 100 / (RatingLimit.Max - RatingLimit.Min); // %
 
 export const getRoundPercentRating = (rating: number): string => {
@@ -13,3 +15,5 @@ export const getRoundPercentRating = (rating: number): string => {
 
   return `${Math.floor(rating) * PERCENTS_PER_STAR}%`;
 };
+
+export const getLocation = (data: Offer[]):Location => data[0].city.location;

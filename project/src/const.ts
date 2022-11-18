@@ -58,4 +58,5 @@ export enum CustomMarker {
 
 export enum MapType {
   Cities = 'cities',
+  NearPlaces = 'property',
 }

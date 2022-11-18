@@ -1,20 +1,19 @@
 import { useState } from 'react';
 
 import { AuthorizationStatus, PlaceCardType, MapType } from '../../const';
+import { getLocation } from '../../utils';
 
 import Header from '../../components/header/header';
 import AvailableCities from '../../components/locations/locations';
 import PlaceCards from '../../components/place-cards/place-cards';
 import Map from '../../components/map/map';
 
-import { Offer, Location } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type MainPageProps = {
   offersCount: number;
   offers: Offer[];
 }
-
-const getLocation = (data: Offer[]):Location => data[0].city.location;
 
 function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
