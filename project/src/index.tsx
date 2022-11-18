@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
 import { offers } from './mocks/offers';
+import { reviews } from './mocks/reviews';
 
 const Settings = {
   offersCount: 313,
@@ -18,6 +19,7 @@ root.render(
     <App
       offersCount={Settings.offersCount}
       offers={offers}
+      reviews={reviews}
     />
   </React.StrictMode>,
 );

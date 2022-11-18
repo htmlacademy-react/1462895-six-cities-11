@@ -11,5 +11,5 @@ export const getRoundPercentRating = (rating: number): string => {
     rating = RatingLimit.Max;
   }
 
-  return `${Math.round(rating) * PERCENTS_PER_STAR}%`;
+  return `${Math.floor(rating) * PERCENTS_PER_STAR}%`;
 };
