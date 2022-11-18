@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import dayjs from 'dayjs';
 
 import { getRoundPercentRating } from '../../utils';
@@ -11,18 +10,12 @@ type ReviewProps = {
 
 function ReviewCard({ review }: ReviewProps): JSX.Element {
   const { comment, date, rating, user } = review;
-  const { isPro, name, avatarUrl } = user;
-
-  const avatarWrapperClassList = cn(
-    'reviews__avatar-wrapper',
-    'user__avatar-wrapper',
-    {'user__avatar-wrapper--pro': isPro}
-  );
+  const { name, avatarUrl } = user;
 
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
-        <div className={avatarWrapperClassList}>
+        <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
             className="reviews__avatar user__avatar"
             src={avatarUrl}
