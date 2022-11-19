@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -14,9 +15,10 @@ import PrivateRoute from '../private-route/private-route';
 type AppProps = {
   offersCount: number;
   offers: Offer[];
+  reviews: Review[];
 }
 
-function App({ offersCount, offers }: AppProps): JSX.Element {
+function App({ offersCount, offers, reviews }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -33,7 +35,10 @@ function App({ offersCount, offers }: AppProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Offer} element={<PropertyPage offers={offers} />} />
+        <Route
+          path={AppRoute.Offer}
+          element={<PropertyPage offers={offers} reviews={reviews} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

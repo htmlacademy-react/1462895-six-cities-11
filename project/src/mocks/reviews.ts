@@ -1,6 +1,6 @@
-import { Comment } from '../types/comment';
+import { Review } from '../types/review';
 
-export const comments: Comment[] = [
+export const reviews: Review[] = [
   {
     comment: 'The deluxe room was a quite comfortable one with all the adequate facilities. The only thing that made me feel uncomfortable was the rude behavior of an impolite staff at the reception desk.',
     date: '2022-10-08T13:58:46.511Z',
