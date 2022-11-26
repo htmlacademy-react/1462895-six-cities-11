@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { AuthorizationStatus, PlaceCardType, MapType } from '../../const';
+import { filterOffersByCity } from '../../utils';
 
 import { useAppSelector } from '../../hooks';
 
@@ -11,9 +12,11 @@ import Map from '../../components/map/map';
 
 function MainPage():JSX.Element {
   const city = useAppSelector((state) => state.city);
-  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
+  const offers = useAppSelector((state) => state.offers);
 
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
+
+  const currentCityOffers = filterOffersByCity(city, offers);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
 
@@ -54,6 +57,7 @@ function MainPage():JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
+                offers={currentCityOffers}
                 mapType={MapType.Cities}
                 crossedCardId={ActiveOfferId}
               />

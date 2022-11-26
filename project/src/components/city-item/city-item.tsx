@@ -1,9 +1,7 @@
 import cn from 'classnames';
 
-import { setCity, setCurrentCityOffers } from '../../store/action';
+import { setCity } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-
-import { filterOffersByCity } from '../../utils';
 
 type CityItemProps = {
   city: string;
@@ -11,7 +9,6 @@ type CityItemProps = {
 
 function CityItem({ city }:CityItemProps ): JSX.Element {
   const currentCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
 
   const clList = cn(
     'locations__item-link',
@@ -25,7 +22,6 @@ function CityItem({ city }:CityItemProps ): JSX.Element {
 
   const handleClick = () => {
     dispatch(setCity(city));
-    dispatch(setCurrentCityOffers(filterOffersByCity(city, offers)));
   };
 
   return (

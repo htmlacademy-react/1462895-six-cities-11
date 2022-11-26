@@ -149,6 +149,7 @@ function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
             </div>
           </div>
           <Map
+            offers={offers.slice(0, 3)}
             mapType={MapType.NearPlaces}
             crossedCardId={ActiveOfferId}
           />
@@ -157,7 +158,7 @@ function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <PlaceCards
-              offers={offers.slice(0,3)}
+              offers={offers.slice(0, 3)}
               cardType={PlaceCardType.NearPlaces}
               onMouseCrossCard={handleMouseCrossCard}
             />

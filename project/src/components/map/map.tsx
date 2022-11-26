@@ -4,12 +4,14 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import useMap from '../../hooks/use-map';
-import { useAppSelector } from '../../hooks';
 
 import { CustomMarker, MapType } from '../../const';
 import { getLocation } from '../../utils';
 
+import { Offer } from '../../types/offer';
+
 type MapProps = {
+  offers: Offer[];
   mapType: MapType;
   crossedCardId: number | null;
 }
@@ -26,16 +28,16 @@ const currentCustomMarker = leaflet.icon({
   iconAnchor: [14, 39],
 });
 
-function Map({ mapType, crossedCardId }: MapProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
-
+function Map({ offers, mapType, crossedCardId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const cityLocation = getLocation(currentCityOffers);
+  const cityLocation = getLocation(offers);
   const map = useMap(mapRef, cityLocation);
+  const markerGroup = leaflet.layerGroup();
 
   useEffect(() => {
     if (map) {
+      markerGroup.addTo(map);
+
       offers.forEach(({ location, id }) => {
         leaflet
           .marker({
@@ -46,17 +48,27 @@ function Map({ mapType, crossedCardId }: MapProps): JSX.Element {
               ? currentCustomMarker
               : defaultCustomMarker,
           })
-          .addTo(map);
+          .addTo(markerGroup);
       });
+    }
 
+    return () => {
+      if (map) {
+        map.removeLayer(markerGroup);
+      }
+    };
+  }, [map, offers, crossedCardId, markerGroup]);
+
+  useEffect(() => {
+    if (map) {
       map.setView({
         lat: cityLocation.latitude,
         lng: cityLocation.longitude,
       });
+
+      map.setZoom(cityLocation.zoom);
     }
-
-
-  }, [map, currentCityOffers, cityLocation, offers, crossedCardId]);
+  }, [map, cityLocation]);
 
   return (
     <section
