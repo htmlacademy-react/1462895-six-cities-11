@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 import cn from 'classnames';
 
 import { setCity } from '../../store/action';
@@ -8,6 +10,8 @@ type CityItemProps = {
 }
 
 function CityItem({ city }:CityItemProps ): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const currentCity = useAppSelector((state) => state.city);
 
   const clList = cn(
@@ -18,27 +22,23 @@ function CityItem({ city }:CityItemProps ): JSX.Element {
     }
   );
 
-  const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(setCity(city));
   };
 
   return (
-    <li className="locations__item" key={city}>
-      {city === currentCity &&
-      <div className={clList}>
-        <span>{city}</span>
-      </div>}
-
-      {city !== currentCity &&
+    <li className="locations__item">
       <a
         href={`#${city}`}
         className={clList}
-        onClick={() => handleClick()}
+        onClick={(evt: MouseEvent<HTMLAnchorElement>) => {
+          evt.preventDefault();
+          handleClick();
+        }}
       >
         <span>{city}</span>
-      </a>}
+      </a>
     </li>
   );
 }
