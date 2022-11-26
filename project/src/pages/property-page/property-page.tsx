@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { MapType, PlaceCardType } from '../../const';
-import { getLocation } from '../../utils';
 
 import Header from '../../components/header/header';
 import PlaceCards from '../../components/place-cards/place-cards';
@@ -150,8 +149,6 @@ function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
             </div>
           </div>
           <Map
-            city={getLocation(offers.slice(0,3))}
-            offers={offers.slice(0,3)}
             mapType={MapType.NearPlaces}
             crossedCardId={ActiveOfferId}
           />

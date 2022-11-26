@@ -1,21 +1,18 @@
 import { useState } from 'react';
 
 import { AuthorizationStatus, PlaceCardType, MapType } from '../../const';
-import { getLocation } from '../../utils';
+
+import { useAppSelector } from '../../hooks';
 
 import Header from '../../components/header/header';
-import AvailableCities from '../../components/locations/locations';
+import CityList from '../../components/city-list/city-list';
 import PlaceCards from '../../components/place-cards/place-cards';
 import Map from '../../components/map/map';
 
-import { Offer } from '../../types/offer';
+function MainPage():JSX.Element {
+  const city = useAppSelector((state) => state.city);
+  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
 
-type MainPageProps = {
-  offersCount: number;
-  offers: Offer[];
-}
-
-function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
@@ -27,13 +24,13 @@ function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <AvailableCities currentLocation="Amsterdam" />
+          <CityList />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{currentCityOffers.length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -50,15 +47,13 @@ function MainPage({offersCount, offers}: MainPageProps):JSX.Element {
                 </ul>
               </form>
               <PlaceCards
-                offers={offers}
+                offers={currentCityOffers}
                 cardType={PlaceCardType.Cities}
                 onMouseCrossCard={handleMouseCrossCard}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                city={getLocation(offers)}
-                offers={offers}
                 mapType={MapType.Cities}
                 crossedCardId={ActiveOfferId}
               />

@@ -3,13 +3,13 @@ import { useEffect, useRef } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { CustomMarker, MapType } from '../../const';
-import { Offer, Location } from '../../types/offer';
 import useMap from '../../hooks/use-map';
+import { useAppSelector } from '../../hooks';
+
+import { CustomMarker, MapType } from '../../const';
+import { getLocation } from '../../utils';
 
 type MapProps = {
-  city: Location;
-  offers: Offer[];
   mapType: MapType;
   crossedCardId: number | null;
 }
@@ -26,9 +26,13 @@ const currentCustomMarker = leaflet.icon({
   iconAnchor: [14, 39],
 });
 
-function Map({ city, offers, mapType, crossedCardId }: MapProps): JSX.Element {
+function Map({ mapType, crossedCardId }: MapProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
+
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const cityLocation = getLocation(currentCityOffers);
+  const map = useMap(mapRef, cityLocation);
 
   useEffect(() => {
     if (map) {
@@ -44,8 +48,15 @@ function Map({ city, offers, mapType, crossedCardId }: MapProps): JSX.Element {
           })
           .addTo(map);
       });
+
+      map.setView({
+        lat: cityLocation.latitude,
+        lng: cityLocation.longitude,
+      });
     }
-  }, [map, offers, crossedCardId]);
+
+
+  }, [map, currentCityOffers, cityLocation, offers, crossedCardId]);
 
   return (
     <section

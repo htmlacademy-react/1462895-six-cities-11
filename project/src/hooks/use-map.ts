@@ -5,7 +5,7 @@ import leaflet, { Map } from 'leaflet';
 import { Location } from '../types/offer';
 import { LayerConfig } from '../const';
 
-function useMap(mapRef: MutableRefObject<HTMLEmbedElement | null>, city: Location): Map | null {
+function useMap(mapRef: MutableRefObject<HTMLEmbedElement | null>, cityLocation: Location): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
@@ -13,10 +13,10 @@ function useMap(mapRef: MutableRefObject<HTMLEmbedElement | null>, city: Locatio
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.latitude,
-          lng: city.longitude,
+          lat: cityLocation.latitude,
+          lng: cityLocation.longitude,
         },
-        zoom: city.zoom,
+        zoom: cityLocation.zoom,
       });
 
       leaflet
@@ -31,7 +31,7 @@ function useMap(mapRef: MutableRefObject<HTMLEmbedElement | null>, city: Locatio
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, cityLocation]);
 
   return map;
 }

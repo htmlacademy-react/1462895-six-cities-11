@@ -9,6 +9,8 @@ export const AvailableCities = [
   'Dusseldorf',
 ];
 
+export const defaultCity = 'Paris';
+
 export const StarMarks: Rating[] = [
   ['perfect', 5],
   ['good', 4],
