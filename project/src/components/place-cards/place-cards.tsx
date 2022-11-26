@@ -25,26 +25,14 @@ function PlaceCards({ offers, cardType, onMouseCrossCard }: PlaceCardsProps): JS
 
   return (
     <div className={clList}>
-      {offers.map((offer) => {
-        if (onMouseCrossCard) {
-          return (
-            <PlaceCard
-              offer={offer}
-              cardType={cardType}
-              onMouseCrossCard={onMouseCrossCard}
-              key={offer.id}
-            />
-          );
-        }
-
-        return (
-          <PlaceCard
-            offer={offer}
-            cardType={cardType}
-            key={offer.id}
-          />
-        );
-      })}
+      {offers.map((offer) => (
+        <PlaceCard
+          offer={offer}
+          cardType={cardType}
+          onMouseCrossCard={onMouseCrossCard}
+          key={offer.id}
+        />
+      ))}
     </div>
   );
 }
