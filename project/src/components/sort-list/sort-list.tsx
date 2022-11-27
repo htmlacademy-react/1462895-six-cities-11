@@ -1,39 +1,44 @@
 import cn from 'classnames';
 
-import { sortTypes, defaultSortType } from '../../const';
+import { setSortType } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { sortTypes } from '../../const';
 
 type SortEListProps = {
-  currentSortType: string;
   isSortListShown: boolean;
-  setSortType: (sortType: string) => void;
   setiISortListShown: (iSortListShown: boolean) => void;
 }
 
-function SortList({ currentSortType, isSortListShown, setSortType, setiISortListShown }: SortEListProps): JSX.Element {
+function SortList({ isSortListShown, setiISortListShown }: SortEListProps): JSX.Element {
+  const sortType = useAppSelector((state) => state.sortType);
+
+  const dispatch = useAppDispatch();
+
   const clList = cn (
     'places__options',
     'places__options--custom',
     {'places__options--opened': isSortListShown},
   );
 
-  const handleClick = (sortType: string) => {
-    setSortType(sortType);
+  const handleClick = (type: string) => {
+    dispatch(setSortType(type));
     setiISortListShown(false);
   };
 
   return (
     <ul className={clList}>
-      {sortTypes.map((sortType) => (
+      {sortTypes.map((type) => (
         <li
           className={cn(
             'places__option',
-            {'places__option--active':sortType === currentSortType},
+            {'places__option--active':type === sortType},
           )}
           tabIndex={0}
-          key={sortType}
-          onClick={() => handleClick(sortType)}
+          key={type}
+          onClick={() => handleClick(type)}
         >
-          {sortType}
+          {type}
         </li>
       ))}
     </ul>

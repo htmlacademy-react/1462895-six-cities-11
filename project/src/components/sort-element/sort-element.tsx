@@ -1,10 +1,12 @@
 import { MouseEvent, useState } from 'react';
 
-import { sortTypes, defaultSortType } from '../../const';
+import { useAppSelector } from '../../hooks';
+
 import SortList from '../sort-list/sort-list';
 
 function SortElement(): JSX.Element {
-  const [ sortType, setSortType ] = useState<string>(defaultSortType);
+  const sortType = useAppSelector((state) => state.sortType);
+
   const [ isSortListShown, setiISortListShown ] = useState<boolean>(false);
 
   const handleClick = ({ target }: MouseEvent<HTMLSpanElement>) => {
@@ -13,7 +15,7 @@ function SortElement(): JSX.Element {
 
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type"
         tabIndex={0}
@@ -25,9 +27,7 @@ function SortElement(): JSX.Element {
         </svg>
       </span>
       <SortList
-        currentSortType={sortType}
         isSortListShown={isSortListShown}
-        setSortType={setSortType}
         setiISortListShown={setiISortListShown}
       />
     </form>
