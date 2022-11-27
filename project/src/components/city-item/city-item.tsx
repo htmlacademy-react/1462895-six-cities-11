@@ -1,0 +1,46 @@
+import { MouseEvent } from 'react';
+
+import cn from 'classnames';
+
+import { setCity } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+type CityItemProps = {
+  city: string;
+}
+
+function CityItem({ city }:CityItemProps ): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const currentCity = useAppSelector((state) => state.city);
+
+  const clList = cn(
+    'locations__item-link',
+    'tabs__item',
+    {
+      'tabs__item--active': city === currentCity,
+    }
+  );
+
+
+  const handleClick = () => {
+    dispatch(setCity(city));
+  };
+
+  return (
+    <li className="locations__item">
+      <a
+        href={`#${city}`}
+        className={clList}
+        onClick={(evt: MouseEvent<HTMLAnchorElement>) => {
+          evt.preventDefault();
+          handleClick();
+        }}
+      >
+        <span>{city}</span>
+      </a>
+    </li>
+  );
+}
+
+export default CityItem;

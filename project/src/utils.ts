@@ -17,3 +17,6 @@ export const getRoundPercentRating = (rating: number): string => {
 };
 
 export const getLocation = (data: Offer[]):Location => data[0].city.location;
+
+export const filterOffersByCity = (target: string, data: Offer[]):Offer[] =>
+  data.filter((item) => item.city.name === target);
