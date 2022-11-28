@@ -25,6 +25,7 @@ function SortElement(): JSX.Element {
       <SortList
         isSortListShown={open}
         onSortClick={() => setOpen(false)}
+        onClickOutside ={() => setOpen(false)}
       />
     </form>
   );

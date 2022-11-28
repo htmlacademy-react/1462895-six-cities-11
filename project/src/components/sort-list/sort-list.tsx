@@ -1,19 +1,29 @@
+import { useRef } from 'react';
+
 import cn from 'classnames';
 
 import { setSortType } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import UseOnClickOutside from '../../hooks/use-on-click-outside';
 
 import { sortTypes } from '../../const';
 
 type SortEListProps = {
   isSortListShown: boolean;
   onSortClick: () => void;
+  onClickOutside: () => void;
 }
 
-function SortList({ isSortListShown, onSortClick }: SortEListProps): JSX.Element {
+function SortList({ isSortListShown, onSortClick, onClickOutside }: SortEListProps): JSX.Element {
   const sortType = useAppSelector((state) => state.sortType);
-
+  const sortList = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
+
+  const handleClickOutside = () => {
+    onClickOutside();
+  };
+
+  UseOnClickOutside(sortList, handleClickOutside);
 
   const clList = cn (
     'places__options',
@@ -27,7 +37,7 @@ function SortList({ isSortListShown, onSortClick }: SortEListProps): JSX.Element
   };
 
   return (
-    <ul className={clList}>
+    <ul className={clList} ref={sortList}>
       {sortTypes.map((type) => (
         <li
           className={cn(
