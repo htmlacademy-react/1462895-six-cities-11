@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { useAppSelector } from '../../hooks';
 
@@ -7,11 +7,7 @@ import SortList from '../sort-list/sort-list';
 function SortElement(): JSX.Element {
   const sortType = useAppSelector((state) => state.sortType);
 
-  const [ isSortListShown, setiISortListShown ] = useState<boolean>(false);
-
-  const handleClick = ({ target }: MouseEvent<HTMLSpanElement>) => {
-    setiISortListShown(!isSortListShown);
-  };
+  const [ open, setOpen ] = useState<boolean>(false);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -19,7 +15,7 @@ function SortElement(): JSX.Element {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={handleClick}
+        onClick={() => setOpen(!open)}
       >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -27,8 +23,8 @@ function SortElement(): JSX.Element {
         </svg>
       </span>
       <SortList
-        isSortListShown={isSortListShown}
-        setiISortListShown={setiISortListShown}
+        isSortListShown={open}
+        onSortClick={() => setOpen(false)}
       />
     </form>
   );

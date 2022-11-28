@@ -7,10 +7,10 @@ import { sortTypes } from '../../const';
 
 type SortEListProps = {
   isSortListShown: boolean;
-  setiISortListShown: (iSortListShown: boolean) => void;
+  onSortClick: () => void;
 }
 
-function SortList({ isSortListShown, setiISortListShown }: SortEListProps): JSX.Element {
+function SortList({ isSortListShown, onSortClick }: SortEListProps): JSX.Element {
   const sortType = useAppSelector((state) => state.sortType);
 
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ function SortList({ isSortListShown, setiISortListShown }: SortEListProps): JSX.
 
   const handleClick = (type: string) => {
     dispatch(setSortType(type));
-    setiISortListShown(false);
+    onSortClick();
   };
 
   return (
@@ -32,7 +32,7 @@ function SortList({ isSortListShown, setiISortListShown }: SortEListProps): JSX.
         <li
           className={cn(
             'places__option',
-            {'places__option--active':type === sortType},
+            {'places__option--active': type === sortType},
           )}
           tabIndex={0}
           key={type}
