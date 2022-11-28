@@ -3,16 +3,15 @@ import { MouseEvent } from 'react';
 import cn from 'classnames';
 
 import { setCity } from '../../store/action';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 
 type CityItemProps = {
   city: string;
+  currentCity: string;
 }
 
-function CityItem({ city }:CityItemProps ): JSX.Element {
+function CityItem({ city, currentCity }:CityItemProps ): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const currentCity = useAppSelector((state) => state.city);
 
   const clList = cn(
     'locations__item-link',

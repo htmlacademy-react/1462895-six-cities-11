@@ -11,6 +11,15 @@ export const AvailableCities = [
 
 export const defaultCity = 'Paris';
 
+export const sortTypes = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+];
+
+export const defaultSortType = 'Popular';
+
 export const StarMarks: Rating[] = [
   ['perfect', 5],
   ['good', 4],
