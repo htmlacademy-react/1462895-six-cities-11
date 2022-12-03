@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { setCity, setSortType } from './action';
 
-import { offers } from '../mocks/offers';
+import { offers } from '../mocks-off/offers';
 
 import { defaultCity, defaultSortType } from '../const';
 

@@ -5,8 +5,8 @@ import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { store } from './store';
 
-import { offers } from './mocks/offers';
-import { reviews } from './mocks/reviews';
+import { offers } from './mocks-off/offers';
+import { reviews } from './mocks-off/reviews';
 
 const Settings = {
   offersCount: 313,
