@@ -5,12 +5,12 @@ import leaflet, { Map } from 'leaflet';
 import { Location } from '../types/offer';
 import { LayerConfig } from '../const';
 
-function useMap(mapRef: MutableRefObject<HTMLEmbedElement | null>, cityLocation: Location): Map | null {
+function useMap(mapRef: MutableRefObject<HTMLEmbedElement | null>, cityLocation: Location | null): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current !== null && !isRenderedRef.current && cityLocation !== null) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: cityLocation.latitude,

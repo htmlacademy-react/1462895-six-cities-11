@@ -1,24 +1,29 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { useAppSelector } from '../../hooks';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
 
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
+import { reviews } from '../../mocks/reviews';
 
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
-  offersCount: number;
-  offers: Offer[];
-  reviews: Review[];
-}
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-function App({ offersCount, offers, reviews }: AppProps): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -30,14 +35,14 @@ function App({ offersCount, offers, reviews }: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesPage />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Offer}
-          element={<PropertyPage offers={offers} reviews={reviews} />}
+          element={<PropertyPage reviews={reviews} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

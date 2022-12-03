@@ -1,5 +1,3 @@
-import { AuthorizationStatus } from '../../const';
-
 import { useAppSelector } from '../../hooks';
 
 import Header from '../../components/header/header';
@@ -12,7 +10,7 @@ function FavoritesPage():JSX.Element {
 
   return (
     <div className="page">
-      <Header hasNav authorizationStatus={AuthorizationStatus.Auth} />
+      <Header hasNav />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

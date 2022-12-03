@@ -1,5 +1,7 @@
 import { Rating } from './types/rating';
 
+export const TIMEOUT_SHOW_ERROR = 3000;
+
 export const AvailableCities = [
   'Paris',
   'Cologne',
@@ -9,7 +11,7 @@ export const AvailableCities = [
   'Dusseldorf',
 ];
 
-export const defaultCity = 'Paris';
+export const DEFAULT_CITY = 'Paris';
 
 export const sortTypes = [
   'Popular',
@@ -18,7 +20,7 @@ export const sortTypes = [
   'Top rated first',
 ];
 
-export const defaultSortType = 'Popular';
+export const DEFAULT_SORT_TYPE = 'Popular';
 
 export const StarMarks: Rating[] = [
   ['perfect', 5],
@@ -33,6 +35,12 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
+}
+
+export enum APIRoute {
+  Offers = 'hotels',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export enum LogotypeType {
