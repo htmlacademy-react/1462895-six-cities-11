@@ -30,7 +30,7 @@ const currentCustomMarker = leaflet.icon({
 
 function Map({ offers, mapType, crossedCardId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const cityLocation = getLocation(offers);
+  const cityLocation = offers.length ? getLocation(offers) : null;
   const map = useMap(mapRef, cityLocation);
   const markerGroup = leaflet.layerGroup();
 
@@ -60,7 +60,7 @@ function Map({ offers, mapType, crossedCardId }: MapProps): JSX.Element {
   }, [map, offers, crossedCardId, markerGroup]);
 
   useEffect(() => {
-    if (map) {
+    if (map && cityLocation) {
       map.setView({
         lat: cityLocation.latitude,
         lng: cityLocation.longitude,

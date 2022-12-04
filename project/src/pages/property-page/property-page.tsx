@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useAppSelector } from '../../hooks';
+
 import { MapType, PlaceCardType } from '../../const';
 
 import Header from '../../components/header/header';
@@ -7,15 +9,14 @@ import PlaceCards from '../../components/place-cards/place-cards';
 import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
 
-import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 type PropertyPageProps = {
-  offers: Offer[];
   reviews: Review[];
 }
 
-function PropertyPage({ offers, reviews }: PropertyPageProps):JSX.Element {
+function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);

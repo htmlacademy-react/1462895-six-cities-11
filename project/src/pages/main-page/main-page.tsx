@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { AuthorizationStatus, PlaceCardType, MapType } from '../../const';
+import { PlaceCardType, MapType } from '../../const';
 import { filterOffersByCity } from '../../utils';
 
 import { useAppSelector } from '../../hooks';
@@ -23,7 +23,7 @@ function MainPage():JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-      <Header isManPage hasNav authorizationStatus={AuthorizationStatus.Auth} />
+      <Header isManPage hasNav />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

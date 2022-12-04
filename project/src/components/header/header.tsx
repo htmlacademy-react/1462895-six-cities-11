@@ -1,18 +1,17 @@
-import { LogotypeType, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
+
+import { LogotypeType } from '../../const';
 import Logo from '../logo/logo';
 import Nav from '../nav/nav';
 
 type HeaderProps = {
   isManPage?: boolean;
   hasNav?: boolean;
-  authorizationStatus?: AuthorizationStatus;
 }
 
-function Header({
-  isManPage = false,
-  hasNav = false,
-  authorizationStatus = AuthorizationStatus.NoAuth,
-}: HeaderProps): JSX.Element {
+function Header({ isManPage = false, hasNav = false, }: HeaderProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <header className="header">
       <div className="container">
