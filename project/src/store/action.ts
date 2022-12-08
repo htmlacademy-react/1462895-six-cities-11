@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { AuthorizationStatus } from '../const';
+import { AppRoute, AuthorizationStatus } from '../const';
 
 import { Offer } from '../types/offer';
 
@@ -30,6 +30,10 @@ export const requireAuthorization = createAction(
   })
 );
 
-export const setError = createAction('game/setError', (error: string | null) => ({
+export const setError = createAction('data/setError', (error: string | null) => ({
   payload: error,
+}));
+
+export const redirectToRoute = createAction('data/redirectToRoute', (route: AppRoute) => ({
+  payload: route,
 }));
