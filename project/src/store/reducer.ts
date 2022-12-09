@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import {
-  setCity, setSortType, loadOffers, setOffersDataLoadingStatus, requireAuthorization, setError
+  setCity, setSortType, loadOffers, setOffersDataLoadingStatus, requireAuthorization
 } from './action';
 
 // import { offers } from '../mocks-off/offers';
@@ -15,7 +15,6 @@ type InitialState = {
   offers: Offer[];
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
-  error: string | null;
 };
 
 const initialState: InitialState = {
@@ -24,7 +23,6 @@ const initialState: InitialState = {
   offers: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
-  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -43,9 +41,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 

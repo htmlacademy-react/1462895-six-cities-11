@@ -1,7 +1,5 @@
 import { Rating } from './types/rating';
 
-export const TIMEOUT_SHOW_ERROR = 3000;
-
 export const AvailableCities = [
   'Paris',
   'Cologne',
