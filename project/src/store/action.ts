@@ -30,6 +30,6 @@ export const requireAuthorization = createAction(
   })
 );
 
-export const redirectToRoute = createAction('data/redirectToRoute', (route: AppRoute) => ({
+export const redirectToRoute = createAction('router/redirectToRoute', (route: AppRoute) => ({
   payload: route,
 }));

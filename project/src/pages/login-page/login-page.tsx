@@ -1,33 +1,48 @@
 import { useRef, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 
-import {useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 
-import {loginAction} from '../../store/api-actions';
-import { AppRoute } from '../../const';
-import {AuthData} from '../../types/auth-data';
+import { loginAction } from '../../store/api-actions';
+import { AuthData } from '../../types/auth-data';
 
 import Header from '../../components/header/header';
 
-function LoginPage():JSX.Element {
+const ERROR_MESSAGE = 'Введите корректные email и пароль';
+
+function LoginPage() :JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
   };
 
+  const validateForm = (login: string | null | undefined, password: string | null | undefined): boolean => {
+    // eslint-disable-next-line no-useless-escape
+    const RE_EMAIL = /[a-zA-Zа-яёА-ЯЁ0-9]{1}([a-zA-Zа-яёА-ЯЁ0-9\-_\.]{1,})?@[a-zA-Zа-яёА-ЯЁ0-9\-]{1}([a-zA-Zа-яёА-ЯЁ0-9.\-]{1,})?[a-zA-Zа-яёА-ЯЁ0-9\-]{1}\.[a-zA-Zа-яёА-ЯЁ]{2,6}/;
+
+    if (!login || !password) {
+      return false;
+    }
+
+    return RE_EMAIL.test(login) && /[0-9]/.test(password) && /[a-zA-Zа-яёА-ЯЁ]/.test(password);
+  };
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    const isFormValid = validateForm(loginRef.current?.value, passwordRef.current?.value);
+
+    if (loginRef.current !== null && passwordRef.current !== null && isFormValid) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
+    } else {
+      toast.warn(ERROR_MESSAGE);
     }
   };
 
@@ -68,7 +83,6 @@ function LoginPage():JSX.Element {
               </div>
               <button
                 className="login__submit form__submit button"
-                onClick={() => navigate(AppRoute.Main)}
                 type="submit"
               >
                 Sign in
