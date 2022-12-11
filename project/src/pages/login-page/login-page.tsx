@@ -9,6 +9,8 @@ import { AuthData } from '../../types/auth-data';
 import Header from '../../components/header/header';
 
 const ERROR_MESSAGE = 'Введите корректные email и пароль';
+const RE_EMAIL = /[a-zA-Zа-яёА-ЯЁ0-9]{1}([a-zA-Zа-яёА-ЯЁ0-9\-_.]{1,})?@[a-zA-Zа-яёА-ЯЁ0-9-]{1}([a-zA-Zа-яёА-ЯЁ0-9.-]{1,})?[a-zA-Zа-яёА-ЯЁ0-9-]{1}\.[a-zA-Zа-яёА-ЯЁ]{2,6}/i;
+const RE_PASSWORD = /^(?=.*[a-zA-Zа-яёА-ЯЁ])(?=.*[0-9]).{2,}$/;
 
 function LoginPage() :JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -20,15 +22,12 @@ function LoginPage() :JSX.Element {
     dispatch(loginAction(authData));
   };
 
-  const validateForm = (login: string | null | undefined, password: string | null | undefined): boolean => {
-    // eslint-disable-next-line no-useless-escape
-    const RE_EMAIL = /[a-zA-Zа-яёА-ЯЁ0-9]{1}([a-zA-Zа-яёА-ЯЁ0-9\-_\.]{1,})?@[a-zA-Zа-яёА-ЯЁ0-9\-]{1}([a-zA-Zа-яёА-ЯЁ0-9.\-]{1,})?[a-zA-Zа-яёА-ЯЁ0-9\-]{1}\.[a-zA-Zа-яёА-ЯЁ]{2,6}/;
-
+  const validateForm = (login?: string, password?: string): boolean => {
     if (!login || !password) {
       return false;
     }
 
-    return RE_EMAIL.test(login) && /[0-9]/.test(password) && /[a-zA-Zа-яёА-ЯЁ]/.test(password);
+    return RE_EMAIL.test(login) && RE_PASSWORD.test(password);
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
