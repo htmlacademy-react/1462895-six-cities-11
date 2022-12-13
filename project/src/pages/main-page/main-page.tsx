@@ -17,6 +17,7 @@ function MainPage():JSX.Element {
   const city = useAppSelector(getCity);
   const offers = useAppSelector(getOffers);
 
+
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 
   const currentCityOffers = filterOffersByCity(city, offers);
