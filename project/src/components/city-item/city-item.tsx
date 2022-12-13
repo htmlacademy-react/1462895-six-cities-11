@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 
 import cn from 'classnames';
 
-import { setCity } from '../../store/action';
+import { getCity } from '../../store/app-process/selectors';
 import { useAppDispatch } from '../../hooks';
 
 type CityItemProps = {
@@ -23,7 +23,7 @@ function CityItem({ city, currentCity }:CityItemProps ): JSX.Element {
 
 
   const handleClick = () => {
-    dispatch(setCity(city));
+    dispatch(getCity);
   };
 
   return (

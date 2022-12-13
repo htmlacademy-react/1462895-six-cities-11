@@ -1,11 +1,12 @@
 import { AvailableCities } from '../../const';
 
 import { useAppSelector } from '../../hooks';
+import { getCity } from '../../store/app-process/selectors';
 
 import CityItem from '../city-item/city-item';
 
 function CityList(): JSX.Element {
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector(getCity);
 
   return (
     <section className="locations container">

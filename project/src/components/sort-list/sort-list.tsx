@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import cn from 'classnames';
 
-import { setSortType } from '../../store/action';
+import { getSortType } from '../../store/app-process/selectors';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import UseOnClickOutside from '../../hooks/use-on-click-outside';
 
@@ -15,7 +15,7 @@ type SortEListProps = {
 }
 
 function SortList({ isSortListShown, onSortClick, onClickOutside }: SortEListProps): JSX.Element {
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   const sortList = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
 
@@ -32,7 +32,7 @@ function SortList({ isSortListShown, onSortClick, onClickOutside }: SortEListPro
   );
 
   const handleClick = (type: string) => {
-    dispatch(setSortType(type));
+    dispatch(getSortType);
     onSortClick();
   };
 

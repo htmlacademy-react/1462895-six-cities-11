@@ -39,7 +39,7 @@ function Nav({ authorizationStatus }: navProps): JSX.Element {
               className="header__nav-link"
               onClick={(evt) => {
                 evt.preventDefault();
-                dispatch(logoutAction());
+                dispatch(logoutAction);
               }}
               to={AppRoute.Main}
             >

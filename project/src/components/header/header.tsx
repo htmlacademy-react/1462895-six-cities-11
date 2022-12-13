@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 import { LogotypeType } from '../../const';
 import Logo from '../logo/logo';
@@ -10,7 +11,7 @@ type HeaderProps = {
 }
 
 function Header({ isManPage = false, hasNav = false, }: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <header className="header">
