@@ -21,9 +21,8 @@ function CityItem({ city, currentCity }:CityItemProps ): JSX.Element {
     }
   );
 
-
   const handleClick = () => {
-    dispatch(setCity);
+    dispatch(setCity({ city }));
   };
 
   return (

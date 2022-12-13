@@ -33,7 +33,7 @@ function SortList({ isSortListShown, onSortClick, onClickOutside }: SortEListPro
   );
 
   const handleClick = (type: string) => {
-    dispatch(setSortType);
+    dispatch(setSortType({ sortType: type }));
     onSortClick();
   };
 
