@@ -22,6 +22,18 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
+export const fetchOfferAction = createAsyncThunk<Offer, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fethchOffer',
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Offer>(`${APIRoute.Offer}/${id}`);
+    return data;
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;

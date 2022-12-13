@@ -3,8 +3,10 @@ import { AuthorizationStatus } from '../const';
 import { Offer } from './offer';
 
 export type AppData = {
-  offers:Offer[];
+  offers: Offer[];
   isOffersDataLoading: boolean;
+  offer: Offer | null;
+  isOfferDataLoading: boolean;
 };
 
 export type GameProcess = {

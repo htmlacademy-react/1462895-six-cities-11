@@ -16,14 +16,15 @@ import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus, getAuthCheckedStatus } from '../../store/user-process/selectors';
-import { getOffersDataLoadingStatus } from '../../store/app-data/selectors';
+import { getOffersDataLoadingStatus, getOfferDataLoadingStatus } from '../../store/app-data/selectors';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
 
-  if (!isAuthChecked || isOffersDataLoading) {
+  if (!isAuthChecked || isOffersDataLoading || isOfferDataLoading) {
     return (
       <LoadingScreen />
     );
