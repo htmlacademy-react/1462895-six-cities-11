@@ -4,6 +4,8 @@ import { PlaceCardType, MapType } from '../../const';
 import { filterOffersByCity } from '../../utils';
 
 import { useAppSelector } from '../../hooks';
+import { getCity } from '../../store/app-process/selectors';
+import { getOffers } from '../../store/app-data/selectors';
 
 import Header from '../../components/header/header';
 import CityList from '../../components/city-list/city-list';
@@ -12,8 +14,9 @@ import PlaceCards from '../../components/place-cards/place-cards';
 import Map from '../../components/map/map';
 
 function MainPage():JSX.Element {
-  const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const city = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
+
 
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 

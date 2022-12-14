@@ -28,6 +28,12 @@ export const StarMarks: Rating[] = [
   ['terribly', 1],
 ];
 
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -39,6 +45,8 @@ export enum APIRoute {
   Offers = 'hotels',
   Login = '/login',
   Logout = '/logout',
+  Offer = 'hotels',
+  Comments = 'comments',
 }
 
 export enum LogotypeType {

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
 import { useAppSelector } from '../../hooks';
+import { getSortType } from '../../store/app-process/selectors';
 
 import SortList from '../sort-list/sort-list';
 
 function SortElement(): JSX.Element {
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
 
   const [ open, setOpen ] = useState<boolean>(false);
 

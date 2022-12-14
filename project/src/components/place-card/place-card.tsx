@@ -54,7 +54,6 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
   };
 
   const { width, height } = sizes[cardType];
-
   return (
     <article
       className={`${cardType}__card place-card`}

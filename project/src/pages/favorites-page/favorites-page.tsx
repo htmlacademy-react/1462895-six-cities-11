@@ -1,12 +1,12 @@
 import { useAppSelector } from '../../hooks';
+import {getOffers} from '../../store/app-data/selectors';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-
 import FavoritesList from '../../components/favorites-list/favorites-list';
 
 function FavoritesPage():JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   return (
     <div className="page">

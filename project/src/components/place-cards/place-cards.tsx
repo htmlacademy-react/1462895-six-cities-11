@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { PlaceCardType } from '../../const';
 
 import { useAppSelector } from '../../hooks';
+import { getSortType } from '../../store/app-process/selectors';
 
 import PlaceCard from '../place-card/place-card';
 
@@ -15,7 +16,7 @@ type PlaceCardsProps = {
 }
 
 function PlaceCards({ offers, cardType, onMouseCrossCard }: PlaceCardsProps): JSX.Element {
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
 
   const clList = cn(
     {
