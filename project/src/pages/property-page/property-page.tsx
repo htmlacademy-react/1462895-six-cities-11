@@ -137,7 +137,7 @@ function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
                   </p>
                 </div>
               </div>
-              <Reviews reviews={comments} />
+              <Reviews reviews={comments} id={id} />
             </div>
           </div>
           <Map

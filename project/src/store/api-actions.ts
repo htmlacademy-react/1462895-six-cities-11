@@ -4,6 +4,7 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
+import { CommentData } from '../types/comment-data';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 
@@ -92,5 +93,17 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
+  },
+);
+
+export const addCommentAction = createAsyncThunk<Review[], CommentData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/addComment',
+  async ({id, comment, rating}, {dispatch, extra: api}) => {
+    const { data } = await api.post<Review[]>(`${APIRoute.Comments}/${id}`, {comment, rating});
+    return data;
   },
 );
