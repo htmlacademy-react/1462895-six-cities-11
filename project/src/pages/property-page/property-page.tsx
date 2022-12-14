@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getOffers, getOffer, getNearOffers, getComments } from '../../store/app-data/selectors';
+import { getOffer, getNearOffers, getComments } from '../../store/app-data/selectors';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 import { MapType, PlaceCardType } from '../../const';
@@ -14,17 +14,10 @@ import PlaceCards from '../../components/place-cards/place-cards';
 import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
 
-import { Review } from '../../types/review';
-
-type PropertyPageProps = {
-  reviews: Review[];
-}
-
-function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
+function PropertyPage():JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
-  const offers = useAppSelector(getOffers);
   const nearOffers = useAppSelector(getNearOffers);
   const comments = useAppSelector(getComments);
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
@@ -141,7 +134,7 @@ function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
             </div>
           </div>
           <Map
-            offers={offers.slice(0, 3)}
+            offers={nearOffers.slice(0, 3)}
             mapType={MapType.NearPlaces}
             crossedCardId={ActiveOfferId}
           />

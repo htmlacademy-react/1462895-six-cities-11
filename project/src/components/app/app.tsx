@@ -4,8 +4,6 @@ import { useAppSelector } from '../../hooks';
 
 import { AppRoute } from '../../const';
 
-import { reviews } from '../../mocks/reviews';
-
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -47,7 +45,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<PropertyPage reviews={reviews} />}
+          element={<PropertyPage />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
