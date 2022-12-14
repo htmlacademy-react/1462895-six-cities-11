@@ -14,11 +14,6 @@ export type AppData = {
   isCommentsDataLoading: boolean;
 };
 
-export type GameProcess = {
-  mistakes: number;
-  step: number;
-};
-
 export type AppProcess = {
   city: string;
   sortType: string;
@@ -26,6 +21,7 @@ export type AppProcess = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  userEmail: string;
 };
 
 export type State = ReturnType<typeof store.getState>;

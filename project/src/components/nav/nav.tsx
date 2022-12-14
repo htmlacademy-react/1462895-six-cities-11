@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
 
 import { AuthorizationStatus, AppRoute } from '../../const';
+import { getUserEmail } from '../../store/app-process/selectors';
 
 type navProps = {
   authorizationStatus: AuthorizationStatus;
@@ -11,6 +12,7 @@ type navProps = {
 
 function Nav({ authorizationStatus }: navProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const userEmail = useAppSelector(getUserEmail);
 
   return (
     <nav className="header__nav">
@@ -22,7 +24,7 @@ function Nav({ authorizationStatus }: navProps): JSX.Element {
             {
               authorizationStatus === AuthorizationStatus.Auth &&
               <>
-                <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                <span className="header__user-name user__name">{userEmail}</span>
                 <span className="header__favorite-count">3</span>
               </>
             }
