@@ -4,8 +4,6 @@ import cn from 'classnames';
 
 import { AppRoute, PlaceCardType } from '../../const';
 import { getRoundPercentRating } from '../../utils';
-import { fetchOfferAction, fetchNearOffersAction, fetchCommentsAction } from '../../store/api-actions';
-import { store } from '../../store';
 
 import { Offer } from '../../types/offer';
 
@@ -56,13 +54,6 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
   };
 
   const { width, height } = sizes[cardType];
-
-  const fetchOffer = () => {
-    store.dispatch(fetchOfferAction(id.toString()));
-    store.dispatch(fetchNearOffersAction(id.toString()));
-    store.dispatch(fetchCommentsAction(id.toString()));
-  };
-
   return (
     <article
       className={`${cardType}__card place-card`}
@@ -76,7 +67,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
         </div>
       }
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={linkTo} onClick={fetchOffer}>
+        <Link to={linkTo}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -106,7 +97,7 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={linkTo} onClick={fetchOffer}>{title}</Link>
+          <Link to={linkTo}>{title}</Link>
         </h2>
         <p className="place-card__type">{`${type[0].toUpperCase()}${type.slice(1)}`}</p>
       </div>

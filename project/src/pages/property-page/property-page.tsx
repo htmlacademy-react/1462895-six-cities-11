@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getOffers, getOffer, getNearOffers, getComments } from '../../store/app-data/selectors';
 
 import { MapType, PlaceCardType } from '../../const';
+import { fetchOfferAction, fetchNearOffersAction, fetchCommentsAction } from '../../store/api-actions';
 
 import Header from '../../components/header/header';
 import PlaceCards from '../../components/place-cards/place-cards';
@@ -17,11 +19,23 @@ type PropertyPageProps = {
 }
 
 function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
   const offers = useAppSelector(getOffers);
   const nearOffers = useAppSelector(getNearOffers);
   const comments = useAppSelector(getComments);
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
+
+  console.log(id);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferAction(id.toString()));
+      dispatch(fetchNearOffersAction(id.toString()));
+      dispatch(fetchCommentsAction(id.toString()));
+    }
+  }, [dispatch, id]);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
 
