@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useAppSelector } from '../../hooks';
-import { getOffers, getOffer } from '../../store/app-data/selectors';
+import { getOffers, getOffer, getNearOffers, getComments } from '../../store/app-data/selectors';
 
 import { MapType, PlaceCardType } from '../../const';
 
@@ -19,12 +19,11 @@ type PropertyPageProps = {
 function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
   const offer = useAppSelector(getOffer);
   const offers = useAppSelector(getOffers);
+  const nearOffers = useAppSelector(getNearOffers);
+  const comments = useAppSelector(getComments);
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
-
-  console.log(offer);
-
 
   return (
     <div className="page">
@@ -114,7 +113,7 @@ function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
                   </p>
                 </div>
               </div>
-              <Reviews reviews={reviews} />
+              <Reviews reviews={comments} />
             </div>
           </div>
           <Map
@@ -127,7 +126,7 @@ function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <PlaceCards
-              offers={offers.slice(0, 3)}
+              offers={nearOffers.slice(0, 3)}
               cardType={PlaceCardType.NearPlaces}
               onMouseCrossCard={handleMouseCrossCard}
             />

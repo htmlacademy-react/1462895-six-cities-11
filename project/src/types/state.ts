@@ -1,12 +1,17 @@
 import { store } from '../store';
 import { AuthorizationStatus } from '../const';
 import { Offer } from './offer';
+import { Review } from './review';
 
 export type AppData = {
   offers: Offer[];
   isOffersDataLoading: boolean;
   offer: Offer | null;
   isOfferDataLoading: boolean;
+  nearOffers: Offer[];
+  isNearOffersDataLoading: boolean;
+  comments: Review[];
+  isCommentsDataLoading: boolean;
 };
 
 export type GameProcess = {

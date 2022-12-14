@@ -9,6 +9,7 @@ import { saveToken, dropToken } from '../services/token';
 
 import { AppRoute, APIRoute, } from '../const';
 import { Offer } from '../types/offer';
+import { Review } from '../types/review';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
@@ -30,6 +31,30 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
   'data/fethchOffer',
   async (id, {dispatch, extra: api}) => {
     const { data } = await api.get<Offer>(`${APIRoute.Offer}/${id}`);
+    return data;
+  },
+);
+
+export const fetchNearOffersAction = createAsyncThunk<Offer[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffers',
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Offer[]>(`${APIRoute.Offer}/${id}/nearby`);
+    return data;
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk<Review[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchComments',
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
     return data;
   },
 );

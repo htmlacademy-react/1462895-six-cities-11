@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { AppRoute, PlaceCardType } from '../../const';
 import { getRoundPercentRating } from '../../utils';
-import { fetchOfferAction } from '../../store/api-actions';
+import { fetchOfferAction, fetchNearOffersAction, fetchCommentsAction } from '../../store/api-actions';
 import { store } from '../../store';
 
 import { Offer } from '../../types/offer';
@@ -59,6 +59,8 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
 
   const fetchOffer = () => {
     store.dispatch(fetchOfferAction(id.toString()));
+    store.dispatch(fetchNearOffersAction(id.toString()));
+    store.dispatch(fetchCommentsAction(id.toString()));
   };
 
   return (
