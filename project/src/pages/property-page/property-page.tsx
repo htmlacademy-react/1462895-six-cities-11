@@ -3,9 +3,11 @@ import { useParams } from 'react-router';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getOffers, getOffer, getNearOffers, getComments } from '../../store/app-data/selectors';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 import { MapType, PlaceCardType } from '../../const';
 import { fetchOfferAction, fetchNearOffersAction, fetchCommentsAction } from '../../store/api-actions';
+import { getOfferDataLoadingStatus, getNearOffersDataLoadingStatus, getCommentsDataLoadingStatus } from '../../store/app-data/selectors';
 
 import Header from '../../components/header/header';
 import PlaceCards from '../../components/place-cards/place-cards';
@@ -27,7 +29,9 @@ function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
   const comments = useAppSelector(getComments);
   const [ActiveOfferId, setActiveOfferId] = useState<number | null>(null);
 
-  console.log(id);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const isNearOffersDataLoading = useAppSelector(getNearOffersDataLoadingStatus);
+  const isCommentsDataLoading = useAppSelector(getCommentsDataLoadingStatus);
 
   useEffect(() => {
     if (id) {
@@ -38,6 +42,12 @@ function PropertyPage({ reviews }: PropertyPageProps):JSX.Element {
   }, [dispatch, id]);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
+
+  if (isOfferDataLoading || isNearOffersDataLoading || isCommentsDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page">
