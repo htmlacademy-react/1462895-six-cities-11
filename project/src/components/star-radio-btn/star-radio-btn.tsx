@@ -4,10 +4,12 @@ import { Rating } from '../../types/rating';
 
 type StarRadioBtnProps = {
   starMark: Rating;
+  isDisabled: boolean;
+  currentRating: string;
   fieldChangeHandler: (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 
-function StarRadioBtn({ starMark, fieldChangeHandler }: StarRadioBtnProps): JSX.Element {
+function StarRadioBtn({ starMark, isDisabled, currentRating, fieldChangeHandler }: StarRadioBtnProps): JSX.Element {
   const [ markDesc, mark] = starMark;
   return (
     <>
@@ -18,6 +20,8 @@ function StarRadioBtn({ starMark, fieldChangeHandler }: StarRadioBtnProps): JSX.
         onChange={fieldChangeHandler}
         id={`${mark}-stars`}
         type="radio"
+        checked={mark.toString() === currentRating}
+        disabled={isDisabled}
       />
       <label
         htmlFor={`${mark}-stars`}

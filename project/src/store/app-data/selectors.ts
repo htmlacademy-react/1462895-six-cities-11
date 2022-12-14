@@ -11,3 +11,4 @@ export const getNearOffers = (state: State): Offer[] => state[NameSpace.Data].ne
 export const getNearOffersDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isNearOffersDataLoading;
 export const getComments = (state: State): Review[] => state[NameSpace.Data].comments;
 export const getCommentsDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isCommentsDataLoading;
+export const getCommentsDataSendingStatus = (state: State): boolean => state[NameSpace.Data].isCommentsDataSending;

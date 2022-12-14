@@ -12,6 +12,7 @@ export type AppData = {
   isNearOffersDataLoading: boolean;
   comments: Review[];
   isCommentsDataLoading: boolean;
+  isCommentsDataSending: boolean;
 };
 
 export type AppProcess = {

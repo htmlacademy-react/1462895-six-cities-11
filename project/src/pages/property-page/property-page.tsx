@@ -50,11 +50,15 @@ function PropertyPage():JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer?.images.map((imgUrl) => (
-                <div className="property__image-wrapper" key={imgUrl}>
-                  <img className="property__image" src={imgUrl} alt="Preview studio" />
-                </div>
-              ))}
+              {
+                offer?.images
+                  .slice(0, 6)
+                  .map((imgUrl) => (
+                    <div className="property__image-wrapper" key={imgUrl}>
+                      <img className="property__image" src={imgUrl} alt="Preview studio" />
+                    </div>
+                  ))
+              }
             </div>
           </div>
           <div className="property__container container">

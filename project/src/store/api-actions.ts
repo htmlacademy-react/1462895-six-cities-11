@@ -11,6 +11,7 @@ import { saveToken, dropToken } from '../services/token';
 import { AppRoute, APIRoute, } from '../const';
 import { Offer } from '../types/offer';
 import { Review } from '../types/review';
+import { toast } from 'react-toastify';
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
@@ -67,7 +68,7 @@ export const checkAuthAction = createAsyncThunk<string, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
-    const { data: { email } } = await api.get(APIRoute.Login);
+    const { data: { email } } = await api.get<UserData>(APIRoute.Login);
     return email;
   },
 );
@@ -104,8 +105,14 @@ export const addCommentAction = createAsyncThunk<Review[], CommentData, {
   extra: AxiosInstance;
 }>(
   'data/addComment',
-  async ({id, comment, rating}, {dispatch, extra: api}) => {
-    const { data } = await api.post<Review[]>(`${APIRoute.Comments}/${id}`, {comment, rating});
-    return data;
+  async ({ id, comment, rating, onSuccess }, { extra: api}) => {
+    try {
+      const { data } = await api.post<Review[]>(`${APIRoute.Comments}/${id}`, {comment, rating});
+      onSuccess();
+      return data;
+    } catch (err) {
+      toast.error('Error adding Comment');
+      throw err;
+    }
   },
 );

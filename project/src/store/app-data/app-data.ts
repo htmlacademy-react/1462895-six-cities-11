@@ -12,6 +12,7 @@ const initialState: AppData = {
   isNearOffersDataLoading: false,
   comments: [],
   isCommentsDataLoading: false,
+  isCommentsDataSending: false,
 };
 
 export const appData = createSlice({
@@ -48,8 +49,15 @@ export const appData = createSlice({
         state.comments = action.payload;
         state.isCommentsDataLoading = false;
       })
+      .addCase(addCommentAction.pending, (state) => {
+        state.isCommentsDataSending = true;
+      })
+      .addCase(addCommentAction.rejected, (state) => {
+        state.isCommentsDataSending = false;
+      })
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.comments = action.payload;
+        state.isCommentsDataSending = false;
       });
   }
 });
