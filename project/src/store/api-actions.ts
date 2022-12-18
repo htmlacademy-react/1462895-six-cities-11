@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
+
+import { StatusCodes } from 'http-status-codes';
 
 import { AppDispatch, State } from '../types/state';
 import { AuthData } from '../types/auth-data';
@@ -45,8 +47,17 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
 }>(
   'data/fethchOffer',
   async (id, {dispatch, extra: api}) => {
-    const { data } = await api.get<Offer>(`${APIRoute.Offer}/${id}`);
-    return data;
+    try {
+      const { data } = await api.get<Offer>(`${APIRoute.Offer}/${id}`);
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err?.response?.status === StatusCodes.NOT_FOUND) {
+          dispatch(redirectToRoute(AppRoute.NotFound));
+        }
+      }
+      throw err;
+    }
   },
 );
 
@@ -82,6 +93,7 @@ export const checkAuthAction = createAsyncThunk<string, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     const { data: { email } } = await api.get<UserData>(APIRoute.Login);
+    dispatch(fetchFavoriteOffersAction());
     return email;
   },
 );
@@ -95,6 +107,7 @@ export const loginAction = createAsyncThunk<string, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const { data: { token, email: userEmail } } = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
+    dispatch(fetchFavoriteOffersAction());
     dispatch(redirectToRoute(AppRoute.Main));
     return userEmail;
   },
@@ -108,6 +121,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   'user/logout',
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
+    dispatch(fetchOffersAction());
     dropToken();
   },
 );
