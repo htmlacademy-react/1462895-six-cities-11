@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { AppData } from '../../types/state';
-import { fetchOffersAction, fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, addCommentAction } from '../api-actions';
+import {
+  fetchOffersAction, fetchOfferAction, fetchNearOffersAction,
+  fetchCommentsAction, addCommentAction, changeFavoriteStatusAction,
+} from '../api-actions';
 
 const initialState: AppData = {
   offers: [],
@@ -58,6 +61,9 @@ export const appData = createSlice({
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.comments = action.payload;
         state.isCommentsDataSending = false;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        state.offer = action.payload;
       });
   }
 });

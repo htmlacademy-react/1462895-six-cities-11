@@ -12,7 +12,7 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import GuestRoute from '../guest-route/guest-route';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus, getAuthCheckedStatus } from '../../store/user-process/selectors';
 import { getOffersDataLoadingStatus } from '../../store/app-data/selectors';
