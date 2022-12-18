@@ -18,21 +18,20 @@ function Nav({ authorizationStatus }: navProps): JSX.Element {
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
-            <div className="header__avatar-wrapper user__avatar-wrapper">
-            </div>
-            {
-              authorizationStatus === AuthorizationStatus.Auth &&
-              <>
-                <span className="header__user-name user__name">{userEmail}</span>
-                <span className="header__favorite-count">3</span>
-              </>
-            }
-            {
-              authorizationStatus === AuthorizationStatus.NoAuth &&
+          {
+            authorizationStatus === AuthorizationStatus.Auth &&
+            <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Main}>
+              <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+              <span className="header__user-name user__name">{userEmail}</span>
+              <span className="header__favorite-count">3</span>
+            </Link>
+          }
+          {
+            authorizationStatus === AuthorizationStatus.NoAuth &&
+            <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
               <span className="header__login">Sign in</span>
-            }
-          </Link>
+            </Link>
+          }
         </li>
         {
           authorizationStatus === AuthorizationStatus.Auth &&

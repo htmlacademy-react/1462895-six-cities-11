@@ -11,7 +11,8 @@ import PropertyPage from '../../pages/property-page/property-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
-import HistoryRouter from '../history-route/history-route';
+import GuestRoute from '../guest-route/guest-route';
+import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus, getAuthCheckedStatus } from '../../store/user-process/selectors';
 import { getOffersDataLoadingStatus } from '../../store/app-data/selectors';
@@ -34,7 +35,14 @@ function App(): JSX.Element {
           path={AppRoute.Main}
           element={<MainPage />}
         />
-        <Route path={AppRoute.Login} element={<LoginPage />} />
+        <Route
+          path={AppRoute.Login}
+          element={
+            <GuestRoute authorizationStatus={authorizationStatus}>
+              <LoginPage />
+            </GuestRoute>
+          }
+        />
         <Route
           path={AppRoute.Favorites}
           element={

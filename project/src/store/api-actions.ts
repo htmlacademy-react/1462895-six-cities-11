@@ -5,6 +5,7 @@ import { AppDispatch, State } from '../types/state';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { CommentData } from '../types/comment-data';
+import { FavoriteData } from '../types/favorite-data';
 import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 
@@ -114,5 +115,18 @@ export const addCommentAction = createAsyncThunk<Review[], CommentData, {
       toast.error('Error adding Comment');
       throw err;
     }
+  },
+);
+
+export const changeFavoriteStatusAction = createAsyncThunk<Offer, FavoriteData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/changeFavoriteStatusAction',
+  async ({ id, isFavorite }, { extra: api }) => {
+    const status = isFavorite ? 0 : 1;
+    const upfatedOffer = await api.post<Offer>(`${APIRoute.Offers}/${id}/${status}`);
+    return upfatedOffer;
   },
 );

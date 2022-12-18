@@ -12,6 +12,7 @@ import { Offer } from '../../types/offer';
 
 type MapProps = {
   offers: Offer[];
+  currentOffer?: Offer | null;
   mapType: MapType;
   crossedCardId: number | null;
 }
@@ -28,7 +29,7 @@ const currentCustomMarker = leaflet.icon({
   iconAnchor: [14, 39],
 });
 
-function Map({ offers, mapType, crossedCardId }: MapProps): JSX.Element {
+function Map({ offers, currentOffer, mapType, crossedCardId }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const cityLocation = offers.length ? getLocation(offers) : null;
   const map = useMap(mapRef, cityLocation);
@@ -50,6 +51,19 @@ function Map({ offers, mapType, crossedCardId }: MapProps): JSX.Element {
           })
           .addTo(markerGroup);
       });
+
+      if (currentOffer) {
+        const { location } = currentOffer;
+        leaflet
+          .marker({
+            lat: location.latitude,
+            lng: location.longitude,
+          }, {
+            icon: currentCustomMarker,
+          })
+          .addTo(markerGroup);
+
+      }
     }
 
     return () => {
@@ -57,7 +71,7 @@ function Map({ offers, mapType, crossedCardId }: MapProps): JSX.Element {
         map.removeLayer(markerGroup);
       }
     };
-  }, [map, offers, crossedCardId, markerGroup]);
+  }, [map, offers, currentOffer, crossedCardId, markerGroup]);
 
   useEffect(() => {
     if (map && cityLocation) {

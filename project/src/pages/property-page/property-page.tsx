@@ -6,7 +6,7 @@ import { getOffer, getNearOffers, getComments } from '../../store/app-data/selec
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 import { MapType, PlaceCardType } from '../../const';
-import { fetchOfferAction, fetchNearOffersAction, fetchCommentsAction } from '../../store/api-actions';
+import { fetchOfferAction, fetchNearOffersAction, fetchCommentsAction, changeFavoriteStatusAction } from '../../store/api-actions';
 import { getOfferDataLoadingStatus, getNearOffersDataLoadingStatus, getCommentsDataLoadingStatus } from '../../store/app-data/selectors';
 
 import Header from '../../components/header/header';
@@ -35,6 +35,13 @@ function PropertyPage():JSX.Element {
   }, [dispatch, id]);
 
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
+
+  const handleOnFavBtnClick = () => {
+    // if (offer) {
+    //   const { id, isFavorite } = offer;
+    //   dispatch(changeFavoriteStatusAction(id, isFavorite));
+    // }
+  };
 
   if (isOfferDataLoading || isNearOffersDataLoading || isCommentsDataLoading) {
     return (
@@ -73,7 +80,11 @@ function PropertyPage():JSX.Element {
                 <h1 className="property__name">
                   {offer?.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className="property__bookmark-button button"
+                  type="button"
+                  onClick={handleOnFavBtnClick}
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -92,10 +103,10 @@ function PropertyPage():JSX.Element {
                   {offer?.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer?.bedrooms} Bedrooms
+                  {offer?.bedrooms} { offer?.bedrooms === 1 ? 'Bedroom' : 'Bedrooms' }
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer?.maxAdults} adults
+                  Max {offer?.maxAdults} { offer?.maxAdults === 1 ? 'adult' : 'adults' }
                 </li>
               </ul>
               <div className="property__price">
@@ -139,6 +150,7 @@ function PropertyPage():JSX.Element {
           </div>
           <Map
             offers={nearOffers.slice(0, 3)}
+            currentOffer={offer}
             mapType={MapType.NearPlaces}
             crossedCardId={ActiveOfferId}
           />
