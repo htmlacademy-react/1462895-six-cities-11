@@ -37,10 +37,10 @@ function PropertyPage():JSX.Element {
   const handleMouseCrossCard = (offerId: number | null) => setActiveOfferId(offerId);
 
   const handleOnFavBtnClick = () => {
-    // if (offer) {
-    //   const { id, isFavorite } = offer;
-    //   dispatch(changeFavoriteStatusAction(id, isFavorite));
-    // }
+    if (offer) {
+      const { isFavorite } = offer;
+      dispatch(changeFavoriteStatusAction({ id: Number(id), isFavorite }));
+    }
   };
 
   if (isOfferDataLoading || isNearOffersDataLoading || isCommentsDataLoading) {
@@ -81,11 +81,16 @@ function PropertyPage():JSX.Element {
                   {offer?.title}
                 </h1>
                 <button
-                  className="property__bookmark-button button"
+                  className="property__bookmark-button property__bookmark-button--active button"
                   type="button"
                   onClick={handleOnFavBtnClick}
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg
+                    className="property__bookmark-icon"
+                    width="31"
+                    height="33"
+                    style={offer?.isFavorite ? {fill: '#4481c3'} : {}}
+                  >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>

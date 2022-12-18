@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
 
 import { AuthorizationStatus, AppRoute } from '../../const';
+import { getFavoriteOffers } from '../../store/app-data/selectors';
 import { getUserEmail } from '../../store/app-process/selectors';
 
 type navProps = {
@@ -12,6 +13,7 @@ type navProps = {
 
 function Nav({ authorizationStatus }: navProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
   const userEmail = useAppSelector(getUserEmail);
 
   return (
@@ -20,10 +22,10 @@ function Nav({ authorizationStatus }: navProps): JSX.Element {
         <li className="header__nav-item user">
           {
             authorizationStatus === AuthorizationStatus.Auth &&
-            <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Main}>
+            <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
               <div className="header__avatar-wrapper user__avatar-wrapper"></div>
               <span className="header__user-name user__name">{userEmail}</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favoriteOffers.length}</span>
             </Link>
           }
           {

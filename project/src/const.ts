@@ -39,6 +39,7 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
+  NotFound = '404',
 }
 
 export enum APIRoute {
@@ -47,6 +48,7 @@ export enum APIRoute {
   Logout = '/logout',
   Offer = 'hotels',
   Comments = 'comments',
+  Favorite = 'favorite',
 }
 
 export enum LogotypeType {

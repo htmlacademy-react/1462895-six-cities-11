@@ -2,6 +2,9 @@ import { Link, generatePath } from 'react-router-dom';
 
 import cn from 'classnames';
 
+import { useAppDispatch } from '../../hooks';
+import { changeFavoriteStatusAction } from '../../store/api-actions';
+
 import { AppRoute, PlaceCardType } from '../../const';
 import { getRoundPercentRating } from '../../utils';
 
@@ -14,6 +17,8 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const {
     previewImage,
     title,
@@ -24,6 +29,12 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
     price,
     id,
   } = offer;
+
+  const handleOnFavBtnClick = () => {
+    if (offer) {
+      dispatch(changeFavoriteStatusAction({ id: Number(id), isFavorite }));
+    }
+  };
 
   const infoClassList = cn(
     'place-card__info',
@@ -83,7 +94,11 @@ function PlaceCard({ offer, cardType, onMouseCrossCard }: PlaceCardProps): JSX.E
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={bookmarkBtnClassList} type="button">
+          <button
+            className={bookmarkBtnClassList}
+            type="button"
+            onClick={handleOnFavBtnClick}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
