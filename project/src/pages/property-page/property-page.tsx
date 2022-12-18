@@ -139,6 +139,7 @@ function PropertyPage():JSX.Element {
           </div>
           <Map
             offers={nearOffers.slice(0, 3)}
+            currentOffer={offer}
             mapType={MapType.NearPlaces}
             crossedCardId={ActiveOfferId}
           />
