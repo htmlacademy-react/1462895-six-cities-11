@@ -47,6 +47,7 @@ export enum APIRoute {
   Logout = '/logout',
   Offer = 'hotels',
   Comments = 'comments',
+  Favorite = 'favorite',
 }
 
 export enum LogotypeType {

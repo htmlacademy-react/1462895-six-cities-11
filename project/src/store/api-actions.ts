@@ -126,7 +126,7 @@ export const changeFavoriteStatusAction = createAsyncThunk<Offer, FavoriteData, 
   'data/changeFavoriteStatusAction',
   async ({ id, isFavorite }, { extra: api }) => {
     const status = isFavorite ? 0 : 1;
-    const upfatedOffer = await api.post<Offer>(`${APIRoute.Offers}/${id}/${status}`);
-    return upfatedOffer;
+    const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${id}/${status}`);
+    return data;
   },
 );

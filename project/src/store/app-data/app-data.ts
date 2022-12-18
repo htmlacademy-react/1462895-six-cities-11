@@ -64,6 +64,17 @@ export const appData = createSlice({
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         state.offer = action.payload;
+
+        const index = state.offers.findIndex((elem) => elem.id === action.payload.id);
+        const nearIndex = state.nearOffers.findIndex((elem) => elem.id === action.payload.id);
+
+        if (index !== -1) {
+          state.offers[index] = action.payload;
+        }
+
+        if (nearIndex !== -1) {
+          state.offers[nearIndex] = action.payload;
+        }
       });
   }
 });
