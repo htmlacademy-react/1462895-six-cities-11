@@ -1,12 +1,13 @@
 import { useAppSelector } from '../../hooks';
-import {getOffers} from '../../store/app-data/selectors';
+import {getFavoriteOffers} from '../../store/app-data/selectors';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 
 function FavoritesPage():JSX.Element {
-  const offers = useAppSelector(getOffers);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+
 
   return (
     <div className="page">
@@ -16,7 +17,7 @@ function FavoritesPage():JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList offers={offers} />
+            <FavoritesList offers={favoriteOffers} />
           </section>
         </div>
       </main>

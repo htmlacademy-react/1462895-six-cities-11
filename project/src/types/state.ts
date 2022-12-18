@@ -6,6 +6,8 @@ import { Review } from './review';
 export type AppData = {
   offers: Offer[];
   isOffersDataLoading: boolean;
+  favoriteOffers: Offer[];
+  isFavoriteOffersDataLoading: boolean;
   offer: Offer | null;
   isOfferDataLoading: boolean;
   nearOffers: Offer[];

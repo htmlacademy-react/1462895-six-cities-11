@@ -2,13 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { AppData } from '../../types/state';
 import {
-  fetchOffersAction, fetchOfferAction, fetchNearOffersAction,
+  fetchOffersAction, fetchFavoriteOffersAction, fetchOfferAction, fetchNearOffersAction,
   fetchCommentsAction, addCommentAction, changeFavoriteStatusAction,
 } from '../api-actions';
 
 const initialState: AppData = {
   offers: [],
   isOffersDataLoading: false,
+  favoriteOffers: [],
+  isFavoriteOffersDataLoading: false,
   offer: null,
   isOfferDataLoading: false,
   nearOffers: [],
@@ -30,6 +32,13 @@ export const appData = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
+      })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.isFavoriteOffersDataLoading = true;
+      })
+      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+        state.isFavoriteOffersDataLoading = false;
       })
       .addCase(fetchOfferAction.pending, (state) => {
         state.isOfferDataLoading = true;
@@ -67,13 +76,21 @@ export const appData = createSlice({
 
         const index = state.offers.findIndex((elem) => elem.id === action.payload.id);
         const nearIndex = state.nearOffers.findIndex((elem) => elem.id === action.payload.id);
+        const favoriteIndex = state.favoriteOffers.findIndex((elem) => elem.id === action.payload.id);
 
         if (index !== -1) {
           state.offers[index] = action.payload;
         }
 
         if (nearIndex !== -1) {
-          state.offers[nearIndex] = action.payload;
+          state.nearOffers[nearIndex] = action.payload;
+        }
+
+        if (favoriteIndex !== -1) {
+          state.favoriteOffers[nearIndex] = action.payload;
+          state.favoriteOffers.splice(favoriteIndex, 1);
+        } else {
+          state.favoriteOffers.push(action.payload);
         }
       });
   }
