@@ -92,10 +92,10 @@ function PropertyPage():JSX.Element {
                   {offer?.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer?.bedrooms} Bedrooms
+                  {offer?.bedrooms} { offer?.bedrooms === 1 ? 'Bedroom' : 'Bedrooms' }
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer?.maxAdults} adults
+                  Max {offer?.maxAdults} { offer?.maxAdults === 1 ? 'adult' : 'adults' }
                 </li>
               </ul>
               <div className="property__price">
